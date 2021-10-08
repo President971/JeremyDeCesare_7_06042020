@@ -1,16 +1,20 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const { Sequelize } = require('sequelize');
 const path = require('path');
 const sauceRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/auth');
 
-//------Connexion a Moongoose
-mongoose.connect('mongodb+srv://president:oaken@cluster0.bcmn6.mongodb.net/Cluster0?retryWrites=true&w=majority',
-  { useNewUrlParser: true,
-    useUnifiedTopology: true })
-  .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
+const sequelize = new Sequelize("nom_base_de_donnees", "nom_utilisateur", "mot_de_passe_utilisateur", {
+  dialect: "mysql",
+  host: "localhost"
+});
 
+try {
+  sequelize.authenticate();
+  console.log('Connecté à la base de données MySQL!');
+} catch (error) {
+  console.error('Impossible de se connecter, erreur suivante :', error);
+}
 const app = express();
 
 //appel des routes
