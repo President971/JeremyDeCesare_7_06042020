@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-dialog v-model="dialog" persistent max-width="480">
+    <v-dialog v-model="dialog" persistent max-width="560">
       <v-card>
         <v-img
           height="240"
