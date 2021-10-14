@@ -19,7 +19,7 @@ module.exports = {
     var bio      = req.body.bio;
 
     if (email == null || username == null || password == null) {
-      return res.status(400).json({ 'error': 'missing parameters' });
+      return res.status(400).json({ 'error': 'missing parameters ton pere' });
     }
 
     if (username.length >= 13 || username.length <= 4) {
@@ -88,7 +88,7 @@ module.exports = {
     var password = req.body.password;
 
     if (email == null ||  password == null) {
-      return res.status(400).json({ 'error': 'missing parameters' });
+      return res.status(400).json({ 'error': 'missing parameters ta mere' });
     }
 
     asyncLib.waterfall([
