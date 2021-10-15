@@ -34,7 +34,7 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="green darken-1" text @click="dialog = false">
+          <v-btn color="green darken-1" text @click="register()">
             Inscription
           </v-btn>
           <v-btn color="green darken-1" text @click="dialog = false">
@@ -70,5 +70,10 @@ export default {
       (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
     ],
   }),
+  methods: {
+    register (){
+      console.log(this.name, this.email);
+    }
+  }
 };
 </script>

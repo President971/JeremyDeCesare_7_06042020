@@ -19,7 +19,7 @@ module.exports = {
     var bio      = req.body.bio;
 
     if (email == null || username == null || password == null) {
-      return res.status(400).json({ 'error': 'missing parameters ton pere' });
+      return res.status(400).json({ 'error': 'missing parameters' });
     }
 
     if (username.length >= 13 || username.length <= 4) {

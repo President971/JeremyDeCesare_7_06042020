@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <div class="row">
-        
+    <b-button href="#" variant="primary" @click="getMessages ()"> BANZAI </b-button>
+    <div class="row" v-for="user in users" :key="user">
+    {{ user }}    
     </div>
     <div class="row">
       <b-card
@@ -27,5 +28,19 @@
 <script>
 export default {
   name: "Discussion",
-};
+  data () {
+    return {
+      users: []
+    } 
+  },
+  methods: {
+    getMessages ()  {
+      const baseURI = 'http://localhost:8080/api/messages'
+      this.$http.get(baseURI)
+      .then((result) => {
+        this.users = result.data
+      })
+    }
+  }
+}
 </script>
