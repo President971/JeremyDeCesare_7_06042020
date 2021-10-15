@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="dialog = false">
   <b-navbar toggleable="lg" type="dark" variant="info">
     <b-navbar-brand href="#">Groupomania</b-navbar-brand>
 

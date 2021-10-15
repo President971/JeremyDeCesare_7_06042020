@@ -1,22 +1,18 @@
 <template>
   <div>
-    <navbar />
-    <discussion />
-    <hello-world />
+    <navbar/>
+    <discussion/>
   </div>
 </template>
 
 <script>
-import HelloWorld from "../components/HelloWorld";
-import Navbar from "../components/Navbar";
-import Discussion from "../components/Discussion";
-
+import Discussion from '../components/Discussion.vue';
+import Navbar from '../components/Navbar.vue';
 
 export default {
   name: "Home",
 
   components: {
-    HelloWorld,
     Navbar,
     Discussion
   },
@@ -24,8 +20,4 @@ export default {
 </script>
 
 <style>
-
-div {
-image: url(/assets/icon.png);
-}
 </style>
