@@ -35,8 +35,8 @@ export default {
   },
   methods: {
     getMessages ()  {
-      const baseURI = 'http://localhost:8080/api/messages'
-      this.$http.get(baseURI)
+      const baseURI = 'http://localhost:8080'
+      this.$http.get(baseURI + "/api/messages/")
       .then((result) => {
         this.users = result.data
       })
