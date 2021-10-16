@@ -12,7 +12,6 @@
           <template #button-content>
             <em>Utilisateur</em>
           </template>
-          <router-link to="/profil">Profil</router-link>
           <b-dropdown-item href="#">Sign Out</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-if="Modal = false">
+  <div class="container">
     <b-button href="#" variant="primary" @click="getMessages ()"> BANZAI </b-button>
     <div class="row" v-for="user in users" :key="user">
     {{ user }}    
