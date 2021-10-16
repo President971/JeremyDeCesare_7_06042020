@@ -28,7 +28,7 @@
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-text-field v-model="email" label="E-mail" required></v-text-field>
           <v-text-field
-            v-model="nom"
+            v-model="username"
             label="Nom d'utilisateur"
             required
           ></v-text-field>
@@ -48,7 +48,7 @@
           class="form-row"
           v-if="mode == 'create' && status == 'error_create'"
         >
-          Adresse mail ou Nom d'utilisateur déjà utilisée
+          Adresse mail ou Nom d'utilisateur incorrecte
         </div> 
 
         <v-spacer></v-spacer>
@@ -82,7 +82,7 @@ export default {
     return {
       mode: "login",
       email: "",
-      nom: "",
+      username: "",
       password: "",
     };
   },
@@ -91,8 +91,7 @@ export default {
       if (this.mode == "create") {
         if (
           this.email != "" &&
-          this.prenom != "" &&
-          this.nom != "" &&
+          this.username != "" &&
           this.password != ""
         ) {
           return true;
@@ -132,21 +131,17 @@ export default {
           }
         );
     },
-    createAccount: function () {
-      this.$store
-        .dispatch("createAccount", {
-          email: this.email,
-          username: this.nom,
-          password: this.password,
-        })
-        .then(
-          function (res) {
-            console.log(res);
-          },
-          function (error) {
-            console.log(error);
-          }
-        );
+   createAccount: function () {
+      const self = this;
+      this.$store.dispatch('createAccount', {
+        email: this.email,
+        username: this.username,
+        password: this.password,
+      }).then(function () {
+        self.login();
+      }, function (error) {
+        console.log(error);
+      })
     },
   },
 };
