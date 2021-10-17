@@ -12,7 +12,7 @@
             <template #button-content>
               <em>Utilisateur</em>
             </template>
-            <router-link to="/profil">Profil</router-link>
+            <router-link to="/profile">Profil</router-link>
             <b-dropdown-item @click="logout()">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
