@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <b-row>
     <b-card
       img-src="https://picsum.photos/600/300/?image=25"
       img-alt="Image"
@@ -10,16 +10,16 @@
     >
       <h1>Mon Profil</h1>
       <b-card-text>
-        <p> Mon Nom : </p>
-        <p> Mon Email : {{ user.email }}</p>
-        <P> Ma Bio : </p>
+        <p>Mon Nom :</p>
+        <p>Mon Email : {{ user.email }}</p>
+        <P> Ma Bio : </P>
 
         <img :src="user.photo" />
       </b-card-text>
 
       <b-button @click="logout()" variant="danger"> Déconnexion </b-button>
     </b-card>
-  </div>
+  </b-row>
 </template>
 
 <script>

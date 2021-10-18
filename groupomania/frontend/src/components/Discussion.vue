@@ -1,26 +1,27 @@
 <template>
-  <div class="container">
-        <div class="row" v-for="user in users" :key="user">
-
-    </div>
-    <div class="row"  v-for="user in users" :key="user">
-      <b-card
-        img-src="https://picsum.photos/600/300/?image=25"
-        img-alt="Image"
-        img-top
-        tag="article"
-        style="max-width: 20rem"
-        class="mb-2"
-      >
-      <h1> {{ user.title }}</h1>
-        <b-card-text>
-         {{user.content}}
-        </b-card-text>
-
-        <b-button href="#" variant="primary">Go somewhere</b-button>
+  <b-container fluid>
+    <b-row v-for="user in users" :key="user">
+      <b-card no-body class="overflow-hidden" style="max-width: 760px">
+        <b-row no-gutters>
+          <b-col md="6">
+            <b-card-img
+              src="https://picsum.photos/400/400/?image=20"
+              alt="Image"
+              class="rounded-0"
+            ></b-card-img>
+          </b-col>
+          <b-col md="6">
+            <b-card-body>
+              <h1> {{ user.title }} </h1>
+              <b-card-text>
+                <p> {{ user.content }} </p>
+              </b-card-text>
+            </b-card-body>
+          </b-col>
+        </b-row>
       </b-card>
-    </div>
-  </div>
+    </b-row>
+  </b-container>
 </template>
 
 <script>

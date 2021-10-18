@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <b-container fluid>
     <b-card no-body class="overflow-hidden" style="max-width: 760px">
       <b-row no-gutters>
         <b-col md="5">
@@ -11,8 +11,10 @@
         </b-col>
         <b-col md="7">
           <b-card-body>
-            <h1> Mon Message </h1>
-            <div>
+            <b-row>
+              <h1>Mon Message</h1>
+            </b-row>
+            <b-row>
               <b-form-textarea
                 id="textarea"
                 v-model="text"
@@ -21,8 +23,8 @@
                 max-rows="6"
               ></b-form-textarea>
               <pre class="mt-3 mb-0">{{ text }}</pre>
-            </div>
-            <div>
+            </b-row>
+            <b-row>
               <!-- Styled -->
               <b-form-file
                 v-model="file1"
@@ -30,17 +32,28 @@
                 placeholder="Choisissez une fichier ou déposer le ici..."
                 drop-placeholder="Drop file here..."
               ></b-form-file>
-            </div>
-              <b-button variant="danger"> Poster </b-button>
+            </b-row>
+            <b-row>
+              <b-button @click="poster()" variant="danger"> Poster </b-button>
+            </b-row>
           </b-card-body>
         </b-col>
       </b-row>
     </b-card>
-  </div>
+  </b-container>
 </template>
 
 <script>
 export default {
   name: "Newmsg",
+  methods: {
+    poster: function () {
+    const baseURI = "http://localhost:8080";
+    this.$http.post(baseURI + "/api/messages/new",{
+      title: 'test50',
+      content: 'teest50',
+    })
+    },
+  },
 };
 </script>

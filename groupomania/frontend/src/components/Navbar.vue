@@ -1,24 +1,24 @@
 <template>
-  <div>
+  <b-container fluid>
     <b-navbar toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand href="#">Groupomania</b-navbar-brand>
+      <b-navbar-brand to="/home">Groupomania</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
-          <b-nav-item-dropdown right>
-            <!-- Using 'button-content' slot -->
-            <template #button-content>
-              <em>Utilisateur</em>
-            </template>
-            <router-link to="/profile">Profil</router-link>
-            <b-dropdown-item @click="logout()">Sign Out</b-dropdown-item>
-          </b-nav-item-dropdown>
+          <b-nav-item right>
+            <b-col>
+              <b-item @click="profile()"> Profil </b-item>
+            </b-col>
+            <b-col>
+              <b-item @click="logout()"> Sign Out </b-item>
+            </b-col> 
+          </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -29,6 +29,9 @@ export default {
       this.$store.commit("logout");
       this.$router.push("/");
     },
+    profile: function () {
+      this.$router.push("/profile")
+    }
   },
 };
 </script>

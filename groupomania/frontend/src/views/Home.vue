@@ -1,11 +1,22 @@
 <template>
-  <div>
-    <navbar/>
-    <newmsg/>
-    <discussion/>
-  </div>
+  <v-container  >
+    <v-row>
+      <v-col>
+        <navbar />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <newmsg />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <discussion />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
-
 <script>
 import Discussion from '../components/Discussion.vue';
 import Navbar from '../components/Navbar.vue';
@@ -22,5 +33,10 @@ export default {
 };
 </script>
 
-<style>
+
+<style lang="css" scoped>
+.container {
+  background-image: (url('~@/assets/icon.png')) ;
+}
+
 </style>
