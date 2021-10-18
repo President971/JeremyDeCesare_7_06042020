@@ -1,12 +1,10 @@
 <template>
   <div class="container">
-    <b-button href="#" variant="primary" @click="getMessages ()"> BANZAI </b-button>
-    <div class="row" v-for="user in users" :key="user">
-    {{ user }}    
+        <div class="row" v-for="user in users" :key="user">
+
     </div>
-    <div class="row">
+    <div class="row"  v-for="user in users" :key="user">
       <b-card
-        title="Card Title"
         img-src="https://picsum.photos/600/300/?image=25"
         img-alt="Image"
         img-top
@@ -14,9 +12,9 @@
         style="max-width: 20rem"
         class="mb-2"
       >
+      <h1> {{ user.title }}</h1>
         <b-card-text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+         {{user.content}}
         </b-card-text>
 
         <b-button href="#" variant="primary">Go somewhere</b-button>
@@ -28,19 +26,16 @@
 <script>
 export default {
   name: "Discussion",
-  data () {
+  data() {
     return {
-      users: []
-    } 
+      users: [],
+    };
   },
-  methods: {
-    getMessages ()  {
-      const baseURI = 'http://localhost:8080'
-      this.$http.get(baseURI + "/api/messages/")
-      .then((result) => {
-        this.users = result.data
-      })
-    }
-  }
-}
+  mounted: function getMessages() {
+    const baseURI = "http://localhost:8080";
+    this.$http.get(baseURI + "/api/messages/").then((result) => {
+      this.users = result.data;
+    });
+  },
+};
 </script>
