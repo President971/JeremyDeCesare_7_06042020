@@ -1,23 +1,39 @@
 <template>
   <b-container fluid>
-    <b-navbar toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand to="/home">Groupomania</b-navbar-brand>
-
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav class="ml-auto">
-          <b-nav-item right>
-            <b-col>
-              <b-item @click="profile()"> Profil </b-item>
-            </b-col>
-            <b-col>
-              <b-item @click="logout()"> Sign Out </b-item>
-            </b-col> 
-          </b-nav-item>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
+    <b-row class="mx-auto bg">
+      <b-navbar toggleable="lg" variant="faded" type="light" class="mx-auto bg">
+        <b-navbar-brand
+          to="/home"
+          img
+          src="../assets/icon.png"
+          class="mx-auto bg"
+        >
+          <b-col
+            ><img
+              src="../assets/icon-left-font.png"
+              alt="Groupomania"
+              height="480px"
+              class="mx-auto bg"
+            />
+          </b-col>
+        </b-navbar-brand>
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <b-collapse id="nav-collapse" is-nav>
+          <b-col>
+            <b-navbar-nav class="mx-auto">
+              <b-nav-item right>
+                <b-col>
+                  <b-item @click="profile()"> Profil </b-item>
+                </b-col>
+                <b-col>
+                  <b-item @click="logout()"> Déconnexion </b-item>
+                </b-col>
+              </b-nav-item>
+            </b-navbar-nav>
+          </b-col>
+        </b-collapse>
+      </b-navbar>
+    </b-row>
   </b-container>
 </template>
 
@@ -30,8 +46,8 @@ export default {
       this.$router.push("/");
     },
     profile: function () {
-      this.$router.push("/profile")
-    }
+      this.$router.push("/profile");
+    },
   },
 };
 </script>

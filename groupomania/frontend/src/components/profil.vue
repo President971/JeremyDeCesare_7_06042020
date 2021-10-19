@@ -6,7 +6,7 @@
       img-top
       tag="article"
       style="max-width: 20rem"
-      class="mb-2"
+      class="mx-auto bg"
     >
       <h1>Mon Profil</h1>
       <b-card-text>

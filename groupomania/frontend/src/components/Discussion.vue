@@ -1,16 +1,15 @@
 <template>
   <b-container fluid>
     <b-row v-for="user in users" :key="user">
-      <b-card no-body class="overflow-hidden" style="max-width: 760px">
-        <b-row no-gutters>
-          <b-col md="6">
+      <b-card no-body  class="mx-auto bg mb-4" style="max-width: 760px">
+        <b-row>
+          <b-col>
             <b-card-img
               src="https://picsum.photos/400/400/?image=20"
               alt="Image"
-              class="rounded-0"
             ></b-card-img>
           </b-col>
-          <b-col md="6">
+          <b-col>
             <b-card-body>
               <h1> {{ user.title }} </h1>
               <b-card-text>

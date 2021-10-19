@@ -1,6 +1,6 @@
 <template>
   <b-container fluid>
-    <b-card no-body class="overflow-hidden" style="max-width: 760px">
+    <b-card no-body class="overflow-hidden mx-auto bg" style="max-width: 760px">
       <b-row no-gutters>
         <b-col md="5">
           <b-card-img
@@ -15,11 +15,11 @@
               <h1>Mon Message</h1>
             </b-row>
             <b-row>
-              <b-form-textarea
+              <b-form-textarea 
                 id="textarea"
                 v-model="text"
                 placeholder="Ecrivez quelques choses..."
-                rows="3"
+                rows=""
                 max-rows="6"
               ></b-form-textarea>
               <pre class="mt-3 mb-0">{{ text }}</pre>
@@ -34,7 +34,7 @@
               ></b-form-file>
             </b-row>
             <b-row>
-              <b-button @click="poster()" variant="danger"> Poster </b-button>
+              <b-button  @click="poster()" variant="danger"> Poster </b-button>
             </b-row>
           </b-card-body>
         </b-col>
@@ -46,6 +46,11 @@
 <script>
 export default {
   name: "Newmsg",
+  data() {
+      return {
+        file1: null,
+      }
+    },
   methods: {
     poster: function () {
     const baseURI = "http://localhost:8080";
