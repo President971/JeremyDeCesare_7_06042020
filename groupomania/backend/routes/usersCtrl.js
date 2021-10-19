@@ -191,5 +191,11 @@ module.exports = {
         return res.status(500).json({ 'error': 'cannot update user profile' });
       }
     });
+  },
+    deleteUserProfile: function(req, res) {
+    // Getting auth header
+    var headerAuth  = req.headers['authorization'];
+    var userId      = jwtUtils.getUserId(headerAuth); 
+    console.log(userId);
   }
 }

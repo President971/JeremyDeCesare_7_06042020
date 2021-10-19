@@ -22,6 +22,7 @@
       </b-card-text>
 
       <b-button @click="logout()" variant="danger"> Déconnexion </b-button>
+      <b-button @click="deleteProfil()" variant=""> delete </b-button>
       <b-button @click="updateProfil()" variant="primary">
         Mise a jour
       </b-button>

@@ -102,7 +102,6 @@ export default new Vuex.Store({
       })
     },
     deleteUser: ({ commit },) => {
-      console.log(user);
       instance.delete('/users/me/', user.userId).then(function () {
         commit('userInfos', null);
       })
