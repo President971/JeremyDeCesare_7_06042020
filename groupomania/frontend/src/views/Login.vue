@@ -1,7 +1,7 @@
 <template>
   <v-container>
       <v-row>
-        <v-card persistent max-width="560">
+        <v-card persistent max-width="560"  class="mx-auto my-10 bg">
           <v-img height="240" src="..\assets\icon-left-font.png"></v-img>
           <h1 class="card__title" v-if="mode == 'login'">Connexion</h1>
           <h1 class="card__title" v-else>Inscription</h1>
