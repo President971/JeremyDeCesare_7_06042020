@@ -16,7 +16,7 @@
             <a class="card__action" @click="switchToLogin()">Se connecter</a>
           </p>
           <v-col v-if="mode == 'login'">
-            <v-form ref="form" v-model="valid" lazy-validation>
+            <v-form ref="form"  lazy-validation>
               <v-text-field
                 v-model="email"
                 label="E-mail"
@@ -30,7 +30,7 @@
             </v-form>
           </v-col>
           <v-col v-else>
-            <v-form ref="form" v-model="valid" lazy-validation>
+            <v-form ref="form"  lazy-validation>
               <v-text-field
                 v-model="email"
                 label="E-mail"

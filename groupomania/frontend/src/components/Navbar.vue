@@ -23,10 +23,10 @@
             <b-navbar-nav class="mx-auto">
               <b-nav-item right>
                 <b-col>
-                  <b-item @click="profile()"> Profil </b-item>
+                  <span @click="profile()"> Profil </span>
                 </b-col>
                 <b-col>
-                  <b-item @click="logout()"> Déconnexion </b-item>
+                  <span @click="logout()"> Déconnexion </span>
                 </b-col>
               </b-nav-item>
             </b-navbar-nav>

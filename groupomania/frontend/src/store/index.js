@@ -58,6 +58,7 @@ export default new Vuex.Store({
   actions: {
     login: ({ commit }, userInfos) => {
       commit('setStatus', 'loading');
+      console.log(userInfos);
       return new Promise((resolve, reject) => {
         commit;
         instance.post('/users/login/', userInfos)
@@ -89,11 +90,22 @@ export default new Vuex.Store({
     getUserInfos: ({ commit }) => {
       instance.get('/users/me/')
         .then(function (response) {
-          commit('userInfos', 'response.data.me')
-          console.log(response);
+          commit('userInfos', response.data)
+          console.log(response.data);
         })
         .catch(function () {
         });
+    },
+    updateUserInfos: ({ commit }, updateUserInfos) => {
+      instance.put('/users/me/', updateUserInfos).then(function () {
+        commit('userInfos', updateUserInfos);
+      })
+    },
+    deleteUser: ({ commit },) => {
+      console.log(user);
+      instance.delete('/users/me/', user.userId).then(function () {
+        commit('userInfos', null);
+      })
     }
   }
 })

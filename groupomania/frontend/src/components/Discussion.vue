@@ -1,6 +1,6 @@
 <template>
   <b-container fluid>
-    <b-row v-for="user in users" :key="user">
+    <b-row v-for="user in users" :key="user.id">
       <b-card no-body  class="mx-auto bg mb-4" style="max-width: 760px">
         <b-row>
           <b-col>

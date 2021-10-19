@@ -49,6 +49,7 @@ export default {
   data() {
       return {
         file1: null,
+        text: '',
       }
     },
   methods: {
