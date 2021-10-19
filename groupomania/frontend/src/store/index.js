@@ -101,10 +101,5 @@ export default new Vuex.Store({
         commit('userInfos', updateUserInfos);
       })
     },
-    deleteUser: ({ commit },) => {
-      instance.delete('/users/me/', user.userId).then(function () {
-        commit('userInfos', null);
-      })
-    }
   }
 })
