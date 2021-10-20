@@ -7,6 +7,7 @@ const axios = require('axios');
 const instance = axios.create({
   baseURL: 'http://localhost:8080/api'
 });
+
 let user = localStorage.getItem('user');
 if (!user) {
   user = {
@@ -33,6 +34,7 @@ export default new Vuex.Store({
       username: '',
       email: '',
       bio: '',
+      attachment: '',
     },
   },
   mutations: {
@@ -58,31 +60,30 @@ export default new Vuex.Store({
   actions: {
     login: ({ commit }, userInfos) => {
       commit('setStatus', 'loading');
-      console.log(userInfos);
       return new Promise((resolve, reject) => {
-        commit;
         instance.post('/users/login/', userInfos)
           .then(function (response) {
-            commit('setStatus', '')
-            commit('logUser', response.data)
+            commit('setStatus', '');
+            commit('logUser', response.data);
             resolve(response);
           })
           .catch(function (error) {
-            commit('setStatus', 'error_login')
+            commit('setStatus', 'error_login');
             reject(error);
           });
-      })
+      });
     },
     createAccount: ({ commit }, userInfos) => {
+      commit('setStatus', 'loading');
       return new Promise((resolve, reject) => {
-        commit('setStatus', 'loading');
+        commit;
         instance.post('/users/register/', userInfos)
           .then(function (response) {
-            commit('setStatus', 'created')
+            commit('setStatus', 'created');
             resolve(response);
           })
           .catch(function (error) {
-            commit('setStatus', 'error_create')
+            commit('setStatus', 'error_create');
             reject(error);
           });
       });
@@ -90,8 +91,7 @@ export default new Vuex.Store({
     getUserInfos: ({ commit }) => {
       instance.get('/users/me/')
         .then(function (response) {
-          commit('userInfos', response.data)
-          console.log(response.data);
+          commit('userInfos', response.data);
         })
         .catch(function () {
         });

@@ -34,7 +34,7 @@
 import { mapState } from "vuex";
 
 export default {
-  name: "Profil",
+  name: "Profile",
   data() {
     return {
       users: [],
@@ -44,11 +44,10 @@ export default {
   mounted: function () {
     console.log(this.$store.state.user);
     if (this.$store.state.user.userId == -1) {
-      this.$router.push("/");
-      return;
+      this.$router.push('/');
+      return ;
     }
-    this.$store.dispatch("getUserInfos");
-    this.bio = this.$store.state.userInfos.bio;
+    this.$store.dispatch('getUserInfos');
   },
   computed: {
     ...mapState({
