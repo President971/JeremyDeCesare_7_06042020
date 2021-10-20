@@ -72,7 +72,7 @@ export default {
     deleteProfil() {
       const baseURI = "http://localhost:8080";
       this.$http
-        .delete(baseURI + "/api/users/", {
+        .delete(baseURI + "/api/users/me", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
           },

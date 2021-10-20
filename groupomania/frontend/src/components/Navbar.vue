@@ -1,21 +1,20 @@
 <template>
   <b-container fluid>
-    <b-row class="mx-auto bg">
+    <b-row class="align-self-center">
       <b-navbar toggleable="lg" variant="faded" type="light" class="mx-auto bg">
+        <b-col></b-col>
         <b-navbar-brand
           to="/home"
           img
           src="../assets/icon.png"
           class="mx-auto bg"
-        >
-          <b-col
-            ><img
-              src="../assets/icon-left-font.png"
-              alt="Groupomania"
-              height="480px"
-              class="mx-auto bg"
-            />
-          </b-col>
+          ><img
+            fluid
+            src="../assets/icon-left-font.png"
+            alt="Groupomania"
+            height="480px"
+            class="mx-auto bg"
+          />
         </b-navbar-brand>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>

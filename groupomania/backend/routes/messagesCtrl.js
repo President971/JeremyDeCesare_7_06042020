@@ -14,6 +14,7 @@ module.exports = {
     // Getting auth header
     var headerAuth  = req.headers['authorization'];
     var userId      = jwtUtils.getUserId(headerAuth);
+    console.log(headerAuth);
 
     // Params
     var title   = req.body.title;
@@ -26,7 +27,6 @@ module.exports = {
     if (title.length <= TITLE_LIMIT || content.length <= CONTENT_LIMIT) {
       return res.status(400).json({ 'error': 'invalid parameters' });
     }
-
     asyncLib.waterfall([
       function(done) {
         models.User.findOne({
@@ -36,7 +36,7 @@ module.exports = {
           done(null, userFound);
         })
         .catch(function(err) {
-          return res.status(500).json({ 'error': 'unable to verify user' });
+          return res.status(500).json({ 'error': 'unable to verify user'});
         });
       },
       function(userFound, done) {
@@ -51,7 +51,7 @@ module.exports = {
             done(newMessage);
           });
         } else {
-          res.status(404).json({ 'error': 'user not found' });
+          res.status(404).json({ 'error': 'user not found'}); 
         }
       },
     ], function(newMessage) {

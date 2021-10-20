@@ -2,49 +2,42 @@
   <b-container fluid>
     <b-card no-body class="overflow-hidden mx-auto bg" style="max-width: 760px">
       <b-row no-gutters>
-        <b-col md="5">
-          <b-card-img
-            src="https://picsum.photos/400/400/?image=20"
-            alt="Image"
-            class="rounded-0"
-          ></b-card-img>
-        </b-col>
-        <b-col md="7">
+        <b-col>
           <b-card-body>
+            <h2>Exprimez-vous</h2>
             <b-row>
-              <h1>Mon Message</h1>
-            </b-row>
-            <b-row>
-              <h2> Mon titre </h2>
+              <b-col>
+                <h5>Titre :</h5>
+              </b-col>
+              <b-col cols="10">
+                <b-input
+                  v-model="title"
+                  id="textarea"
+                  placeholder="Ajouter un titre"
+                  rows="1"
+                  max-rows="1"
+                ></b-input>
+              </b-col>
               <b-form-textarea
                 id="textarea"
-                v-model="text"
-                placeholder="Ecrivez quelques choses..."
-                rows="1"
-                max-rows="1"
-              ></b-form-textarea>
-            </b-row>
-            <h3>Mon message</h3>
-            <b-row>
-              <b-form-textarea
-                id="textarea"
-                v-model="text"
-                placeholder="Ecrivez quelques choses..."
-                rows=""
+                v-model="content"
+                placeholder="Ajouter un texte"
+                rows="4"
                 max-rows="6"
               ></b-form-textarea>
             </b-row>
             <b-row>
               <!-- Styled -->
-              <b-form-file
-                v-model="file1"
-                :state="Boolean(file1)"
-                placeholder="Choisissez une fichier ou déposer le ici..."
-                drop-placeholder="Drop file here..."
-              ></b-form-file>
-            </b-row>
-            <b-row>
-              <b-button @click="poster()" variant="danger"> Poster </b-button>
+              <b-col>
+                <b-form-file
+                  v-model="attachment"
+                  class="mt-4"
+                  plain
+                ></b-form-file>
+              </b-col>
+              <b-col>
+                <b-button @click="newMessage()" class="mt-4"> Poster </b-button>
+              </b-col>
             </b-row>
           </b-card-body>
         </b-col>
@@ -58,17 +51,22 @@ export default {
   name: "Newmsg",
   data() {
     return {
-      file1: null,
-      text: null,
+      title: "",
+      content: "",
+      attachment: null,
     };
   },
   methods: {
-    poster: function () {
+    newMessage() {
+      console.log(this.content);
+      let newMessage = {
+        title: this.title,
+        content: this.content,
+        attachment: this.attachment,
+      };
       const baseURI = "http://localhost:8080";
-      this.$http.post(baseURI + "/api/messages/new", {
-        title: "",
-        content: "",
-      });
+      this.$http.post(baseURI + "/api/messages/new", newMessage);
+      console.log(newMessage);
     },
   },
 };

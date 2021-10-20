@@ -1,16 +1,16 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col>
+  <b-container>
+    <b-row>
+      <b-col>
         <navbar />
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
         <profil />
-      </v-col>
-    </v-row>
-  </v-container>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
