@@ -192,13 +192,18 @@ module.exports = {
       }
     });
   },
-  deleteProfile: function (req, res, next) {
-    User.findOne({ where: { id: req.params.id } })
-      .then((user) => {
-        User.destroy({ where: { id: req.params.id } }) // Méthode //
-          .then(() => res.status(200).json({ message: 'Compte supprimé' }))
-          .catch(error => res.status(400).json({ error }));
-      })
+  deleteProfile: function (req, res,) {
+    var headerAuth = req.headers['authorization'];
+    var userId = jwtUtils.getUserId(headerAuth);
+
+    models.User.findOne({
+      attributes: ['id', 'email', 'username', 'bio'],
+      where: { id: userId }
+    }).then(function (userId) {
+      models.destroy({ where: { id: userId } }) // Méthode //
+        .then(() => res.status(200).json({ message: 'Compte supprimé' }))
+        .catch(error => res.status(400).json({ error }));
+    })
       .catch(error => res.status(500).json({ error }));
   },
 

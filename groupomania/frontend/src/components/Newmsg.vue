@@ -15,14 +15,24 @@
               <h1>Mon Message</h1>
             </b-row>
             <b-row>
-              <b-form-textarea 
+              <h2> Mon titre </h2>
+              <b-form-textarea
+                id="textarea"
+                v-model="text"
+                placeholder="Ecrivez quelques choses..."
+                rows="1"
+                max-rows="1"
+              ></b-form-textarea>
+            </b-row>
+            <h3>Mon message</h3>
+            <b-row>
+              <b-form-textarea
                 id="textarea"
                 v-model="text"
                 placeholder="Ecrivez quelques choses..."
                 rows=""
                 max-rows="6"
               ></b-form-textarea>
-              <pre class="mt-3 mb-0">{{ text }}</pre>
             </b-row>
             <b-row>
               <!-- Styled -->
@@ -34,7 +44,7 @@
               ></b-form-file>
             </b-row>
             <b-row>
-              <b-button  @click="poster()" variant="danger"> Poster </b-button>
+              <b-button @click="poster()" variant="danger"> Poster </b-button>
             </b-row>
           </b-card-body>
         </b-col>
@@ -47,18 +57,18 @@
 export default {
   name: "Newmsg",
   data() {
-      return {
-        file1: null,
-        text: '',
-      }
-    },
+    return {
+      file1: null,
+      text: null,
+    };
+  },
   methods: {
     poster: function () {
-    const baseURI = "http://localhost:8080";
-    this.$http.post(baseURI + "/api/messages/new",{
-      title: 'test50',
-      content: 'teest50',
-    })
+      const baseURI = "http://localhost:8080";
+      this.$http.post(baseURI + "/api/messages/new", {
+        title: "",
+        content: "",
+      });
     },
   },
 };

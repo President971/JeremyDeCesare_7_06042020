@@ -70,8 +70,17 @@ export default {
       this.$store.dispatch("updateUserInfos", updateUserInfos);
     },
     deleteProfil() {
-      this.$store.dispatch("deleteUser");
-      this.logout();
+      const baseURI = "http://localhost:8080";
+      this.$http
+        .delete(baseURI + "/api/users/", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        })
+        .then(() => {
+          localStorage.clear();
+        })
+        .catch((error) => console.log(error));
     },
   },
 };
