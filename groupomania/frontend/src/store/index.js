@@ -29,7 +29,13 @@ if (!user) {
 export default new Vuex.Store({
   state: {
     status: '',
-    user: user,
+    user: {
+      username: 'Nc',
+      userId: 'Nc',
+      email: 'Nc',
+      token: null,
+      isAdmin: false
+    },
     userInfos: {
       username: '',
       email: '',

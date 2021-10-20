@@ -37,6 +37,11 @@ export default {
   name: "Profile",
   data() {
     return {
+      userAccount: {
+        userId: localStorage.getItem("userId"),
+        username: "",
+        createdAt: "",
+      },
       users: [],
       bio: "",
     };
@@ -44,15 +49,16 @@ export default {
   mounted: function () {
     console.log(this.$store.state.user);
     if (this.$store.state.user.userId == -1) {
-      this.$router.push('/');
-      return ;
+      this.$router.push("/");
+      return;
     }
-    this.$store.dispatch('getUserInfos');
+    this.$store.dispatch("getUserInfos");
   },
   computed: {
     ...mapState({
       user: "userInfos",
     }),
+    ...mapState(["user"]),
   },
   methods: {
     logout() {
@@ -69,16 +75,20 @@ export default {
       this.$store.dispatch("updateUserInfos", updateUserInfos);
     },
     deleteProfil() {
-      const baseURI = "http://localhost:8080";
-      this.$http
-        .delete(baseURI + "/api/users/me", {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        })
-        .then(() => {
+      let url = `http://localhost:8080/api/users/${this.userAccount.userId}`;
+      let options = {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      };
+      fetch(url, options)
+        .then((response) => {
+          console.log(response);
           localStorage.clear();
+          alert("Suppression du compte confirmée ! 😢");
         })
+        //.then(this.$router.push("/signup"))
         .catch((error) => console.log(error));
     },
   },
