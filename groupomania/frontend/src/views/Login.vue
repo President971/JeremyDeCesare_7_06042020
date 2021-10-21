@@ -101,7 +101,7 @@ export default {
   },
   mounted: function () {
     if (this.$store.state.user.userId != -1) {
-      this.$router.push("/home");
+      this.$router.push("/forum");
       return;
     }
   },

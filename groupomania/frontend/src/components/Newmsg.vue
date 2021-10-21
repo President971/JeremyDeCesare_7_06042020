@@ -9,7 +9,13 @@
       <b-row no-gutters>
         <b-col>
           <b-card-body>
-            <h2>Exprimez-vous</h2>
+            <div class="mb-4">
+              <b-avatar
+                variant="info"
+                src="https://placekitten.com/300/300"
+              ></b-avatar>
+              <h2>Exprimez-vous</h2>
+            </div>
             <b-row>
               <b-col>
                 <h5>Titre :</h5>

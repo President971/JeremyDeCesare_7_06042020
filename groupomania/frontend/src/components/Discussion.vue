@@ -5,10 +5,21 @@
         <b-row>
           <b-col>
             <b-card-img
+              style="max-height: 460px"
               src="https://picsum.photos/400/400/?image=20"
               fluid
               alt="Image"
             ></b-card-img>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <b-card-body>
+              <h2>{{ user.title }}</h2>
+              <b-card-text>
+                <p>{{ user.content }}</p>
+              </b-card-text>
+            </b-card-body>
           </b-col>
         </b-row>
         <b-row>

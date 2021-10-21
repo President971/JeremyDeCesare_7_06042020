@@ -23,7 +23,7 @@ import Navbar from '../components/Navbar.vue';
 import Newmsg from '../components/Newmsg.vue';
 
 export default {
-  name: "Home",
+  name: "Forum",
 
   components: {
     Navbar,
