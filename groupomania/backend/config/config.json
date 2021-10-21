@@ -7,4 +7,5 @@
       "dialect": "mysql",
       "operatorsAliases": false,
       "timezone": "SYSTEM"
-    },
+    }
+}
