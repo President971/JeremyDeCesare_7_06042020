@@ -12,7 +12,7 @@
       <b-card-text>
         <p>Mon Nom : {{ user.username }}</p>
         <p>Mon Email : {{ user.email }}</p>
-        <p>Ma Bio : </p>
+        <p>Ma Bio :</p>
         <b-row>
           <div>
             <b-form-input v-model="bio"></b-form-input>
@@ -22,7 +22,7 @@
       </b-card-text>
 
       <b-button @click="logout()" variant="danger"> Déconnexion </b-button>
-      <b-button @click="deleteProfil()" variant=""> delete </b-button>
+      <b-button @click="deleteAccount()" variant=""> delete </b-button>
       <b-button @click="updateProfil()" variant="primary">
         Mise a jour
       </b-button>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import { mapState } from "vuex";
 
 export default {
@@ -67,6 +68,19 @@ export default {
       };
       console.log(updateUserInfos);
       this.$store.dispatch("updateUserInfos", updateUserInfos);
+    },
+    deleteAccount() {
+      axios
+        .delete("http://localhost:8080/api/user/delete", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        })
+        .then(() => {
+          localStorage.clear();
+          location.replace(location.origin + "/login");
+        })
+        .catch((error) => console.log(error));
     },
   },
 };
