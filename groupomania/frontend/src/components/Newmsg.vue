@@ -47,7 +47,7 @@
                 ></b-form-file>
               </b-col>
               <b-col>
-                <b-button @click="newMessage()" class="mt-4"> Poster </b-button>
+                <b-button @click="newMessage()" variant="danger" class="mt-4"> Poster </b-button>
               </b-col>
             </b-row>
           </b-card-body>
