@@ -144,7 +144,7 @@ export default {
         })
         .then(
           function () {
-            self.$router.push("/home");
+            self.$router.push("/forum");
           },
           function (error) {
             console.log(error);

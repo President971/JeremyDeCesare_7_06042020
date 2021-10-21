@@ -1,5 +1,6 @@
 // Imports
 var express      = require('express');
+var cors = require('cors')
 var usersCtrl    = require('./routes/usersCtrl');
 var messagesCtrl = require('./routes/messagesCtrl');
 var likesCtrl    = require('./routes/likesCtrl');
@@ -7,6 +8,7 @@ var likesCtrl    = require('./routes/likesCtrl');
 // Router
 exports.router = (function() {
   var apiRouter = express.Router();
+  apiRouter.use(cors());
 
   apiRouter.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

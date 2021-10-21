@@ -1,5 +1,10 @@
 <template>
   <b-container fluid>
+    <b-row>
+      <b-col>
+        <h1>Dernières Publication</h1>
+      </b-col>
+    </b-row>
     <b-card no-body class="overflow-hidden mx-auto bg" style="max-width: 760px">
       <b-row no-gutters>
         <b-col>

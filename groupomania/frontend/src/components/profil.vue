@@ -12,7 +12,7 @@
       <b-card-text>
         <p>Mon Nom : {{ user.username }}</p>
         <p>Mon Email : {{ user.email }}</p>
-        <p>Ma Bio :</p>
+        <p>Ma Bio : </p>
         <b-row>
           <div>
             <b-form-input v-model="bio"></b-form-input>
@@ -37,11 +37,6 @@ export default {
   name: "Profile",
   data() {
     return {
-      userAccount: {
-        userId: localStorage.getItem("userId"),
-        username: "",
-        createdAt: "",
-      },
       users: [],
       bio: "",
     };
@@ -58,7 +53,6 @@ export default {
     ...mapState({
       user: "userInfos",
     }),
-    ...mapState(["user"]),
   },
   methods: {
     logout() {
@@ -73,23 +67,6 @@ export default {
       };
       console.log(updateUserInfos);
       this.$store.dispatch("updateUserInfos", updateUserInfos);
-    },
-    deleteProfil() {
-      let url = `http://localhost:8080/api/users/${this.userAccount.userId}`;
-      let options = {
-        method: "DELETE",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      };
-      fetch(url, options)
-        .then((response) => {
-          console.log(response);
-          localStorage.clear();
-          alert("Suppression du compte confirmée ! 😢");
-        })
-        //.then(this.$router.push("/signup"))
-        .catch((error) => console.log(error));
     },
   },
 };

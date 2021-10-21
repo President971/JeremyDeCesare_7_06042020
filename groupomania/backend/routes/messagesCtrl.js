@@ -51,7 +51,7 @@ module.exports = {
             done(newMessage);
           });
         } else {
-          res.status(404).json({ 'error': 'user not found'}); 
+          res.status(404).json({ 'error': 'Ca marche pas'}); 
         }
       },
     ], function(newMessage) {

@@ -14,7 +14,7 @@
         <b-row>
           <b-col>
             <b-card-body>
-              <h1>{{ user.title }}</h1>
+              <h2>{{ user.title }}</h2>
               <b-card-text>
                 <p>{{ user.content }}</p>
               </b-card-text>

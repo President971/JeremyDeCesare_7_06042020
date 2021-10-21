@@ -4,7 +4,7 @@
       <b-navbar toggleable="lg" variant="faded" type="light" class="mx-auto bg">
         <b-col></b-col>
         <b-navbar-brand
-          to="/home"
+          to="/Forum"
           img
           src="../assets/icon.png"
           class="mx-auto bg"
