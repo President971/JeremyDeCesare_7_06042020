@@ -10,7 +10,7 @@
     >
       <h1>Mon Profil</h1>
       <b-card-text>
-        <p>Mon Nom : {{ user.username }}</p>
+        <p>Mon Nom : {{ user.userName }}</p>
         <p>Mon Email : {{ user.email }}</p>
         <p>Ma Bio :</p>
         <b-row>
@@ -62,7 +62,7 @@ export default {
     },
     updateProfil() {
       let updateUserInfos = {
-        username: this.user.username,
+        userName: this.user.userName,
         email: this.user.email,
         bio: this.bio,
       };

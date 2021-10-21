@@ -37,7 +37,7 @@
               required
             ></v-text-field>
             <v-text-field
-              v-model="username"
+              v-model="userName"
               label="Nom d'utilisateur"
               required
             ></v-text-field>
@@ -89,29 +89,23 @@
 <script>
 import { mapState } from "vuex";
 
+
 export default {
   name: "Login",
   data: function () {
     return {
       mode: "login",
       email: "",
-      username: "",
+      userName: "",
       password: "",
     };
-  },
-  mounted: function () {
-    if (this.$store.state.user.userId != -1) {
-      this.$router.push("/forum");
-      return;
-    }
   },
   computed: {
     validatedFields: function () {
       if (this.mode == "create") {
         if (
           this.email != "" &&
-          this.prenom != "" &&
-          this.nom != "" &&
+          this.userName != "" &&
           this.password != ""
         ) {
           return true;
@@ -156,7 +150,7 @@ export default {
       this.$store
         .dispatch("createAccount", {
           email: this.email,
-          username: this.username,
+          userName: this.userName,
           password: this.password,
         })
         .then(

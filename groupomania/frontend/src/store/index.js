@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 const axios = require('axios');
 const instance = axios.create({
-  baseURL: 'http://localhost:8080/api'
+  baseURL: 'http://localhost:3000/api'
 });
 
 let user = localStorage.getItem('user');
@@ -29,16 +29,11 @@ if (!user) {
 export default new Vuex.Store({
   state: {
     status: '',
-    user: {
-      username: 'Nc',
-      userId: 'Nc',
-      email: 'Nc',
-      token: null,
-      isAdmin: false
-    },
+
     userInfos: {
-      username: '',
+      userName: '',
       email: '',
+      password: '',
       bio: '',
       attachment: '',
     },
@@ -67,7 +62,7 @@ export default new Vuex.Store({
     login: ({ commit }, userInfos) => {
       commit('setStatus', 'loading');
       return new Promise((resolve, reject) => {
-        instance.post('/users/login/', userInfos)
+        instance.post('/auth/login/', userInfos)
           .then(function (response) {
             commit('setStatus', '');
             commit('logUser', response.data);
@@ -83,7 +78,7 @@ export default new Vuex.Store({
       commit('setStatus', 'loading');
       return new Promise((resolve, reject) => {
         commit;
-        instance.post('/users/register/', userInfos)
+        instance.post('/auth/signup/', userInfos)
           .then(function (response) {
             commit('setStatus', 'created');
             resolve(response);
@@ -95,7 +90,7 @@ export default new Vuex.Store({
       });
     },
     getUserInfos: ({ commit }) => {
-      instance.get('/users/me/')
+      instance.get('/user/;id/')
         .then(function (response) {
           commit('userInfos', response.data);
         })
@@ -103,7 +98,7 @@ export default new Vuex.Store({
         });
     },
     updateUserInfos: ({ commit }, updateUserInfos) => {
-      instance.put('/users/me/', updateUserInfos).then(function () {
+      instance.put('/user/:id/', updateUserInfos).then(function () {
         commit('userInfos', updateUserInfos);
       })
     },
