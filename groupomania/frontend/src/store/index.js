@@ -33,9 +33,9 @@ export default new Vuex.Store({
     userInfos: {
       username: '',
       email: '',
-      password: '',
-      attachment: '',
+      avatar: '',
     },
+    editOption: ""
   },
   mutations: {
     setStatus: function (state, status) {
@@ -47,7 +47,8 @@ export default new Vuex.Store({
       state.user = user;
     },
     userInfos: function (state, userInfos) {
-      state.userInfos = userInfos;
+      state.userInfos.username = userInfos.username;
+      state.userInfos.email = userInfos.email;
     },
     logout: function (state) {
       state.user = {
@@ -59,12 +60,13 @@ export default new Vuex.Store({
   },
   actions: {
     login: ({ commit }, userInfos) => {
-      commit('setStatus', 'loading');
+      commit('setStatus');
       return new Promise((resolve, reject) => {
         instance.post('/user/login', userInfos)
           .then(function (response) {
-            commit('setStatus', '');
+            commit('setStatus');
             commit('logUser', response.data);
+            commit('userInfos',response.data);
             resolve(response);
           })
           .catch(function (error) {
@@ -74,7 +76,7 @@ export default new Vuex.Store({
       });
     },
     createAccount: ({ commit }, userInfos) => {
-      commit('setStatus', 'loading');
+      commit('setStatus');
       return new Promise((resolve, reject) => {
         commit;
         instance.post('/user/signup', userInfos)

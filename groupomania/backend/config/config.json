@@ -5,7 +5,6 @@
       "database": "groupomania",
       "host": "localhost",
       "dialect": "mysql",
-      "operatorsAliases": false,
       "timezone": "SYSTEM"
     }
 }

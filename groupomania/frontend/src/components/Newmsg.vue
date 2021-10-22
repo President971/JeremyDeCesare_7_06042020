@@ -10,27 +10,15 @@
         <b-col>
           <b-card-body>
             <div class="mb-4">
-              <b-avatar
-                variant="info"
-                src="https://placekitten.com/300/300"
-              ></b-avatar>
-              <h2>Exprimez-vous</h2>
+              <b-avatar variant="info"
+                ></b-avatar
+              >
+              <span> {{ user.username }} </span>
+              <h3>Créer un post</h3>
             </div>
             <b-row>
-              <b-col>
-                <h5>Titre :</h5>
-              </b-col>
-              <b-col cols="10">
-                <b-input
-                  v-model="title"
-                  id="textarea"
-                  placeholder="Ajouter un titre"
-                  rows="1"
-                  max-rows="1"
-                ></b-input>
-              </b-col>
               <b-form-textarea
-                id="textarea"
+                id="input_text"
                 v-model="content"
                 placeholder="Ajouter un texte"
                 rows="4"
@@ -41,13 +29,15 @@
               <!-- Styled -->
               <b-col>
                 <b-form-file
-                  v-model="attachment"
+                  v-model="postImage"
                   class="mt-4"
                   plain
                 ></b-form-file>
               </b-col>
               <b-col>
-                <b-button @click="newMessage()" variant="danger" class="mt-4"> Poster </b-button>
+                <b-button @click="newMessage()" variant="danger" class="mt-4">
+                  Poster
+                </b-button>
               </b-col>
             </b-row>
           </b-card-body>
@@ -58,34 +48,63 @@
 </template>
 
 <script>
+import axios from "axios";
+import { mapState } from "vuex";
 export default {
-  name: "Newmsg",
+  name: "CreatePost",
   data() {
     return {
-      title: "",
-      content: "",
-      attachment: null,
+      content: null,
+      postImage: null,
+      msgError: "",
     };
   },
   mounted: function () {
-    console.log(this.$store.state.user);
     if (this.$store.state.user.userId == -1) {
       this.$router.push("/");
       return;
     }
   },
+  computed: {
+    ...mapState(["user", "editOption"]),
+  },
   methods: {
     newMessage() {
-      console.log(this.content);
-      let newMessage = {
-        title: this.title,
-        content: this.content,
-        attachment: this.attachment,
-      };
-      const baseURI = "http://localhost:3000";
-      this.$http.post(baseURI + "/api/messages/new", newMessage);
-      console.log(newMessage);
+      const fd = new FormData();
+      fd.append("inputFile", this.postImage);
+      fd.append("content", this.content);
+      if (fd.get("inputFile") == "null" && fd.get("content") == "null") {
+        let msgReturn = document.getElementById("msgReturnAPI");
+        msgReturn.classList.add("text-danger");
+        this.msgError = "Rien à publier";
+      } else {
+        console.log(fd);
+        axios
+          .post("http://localhost:3000/api/post/create", fd, {
+            headers: {
+              Authorization: "Bearer " + this.$store.state.user.token,
+            },
+          })
+          .then((response) => {
+            //Si retour positif de l'API reload de la page pour affichage du dernier post
+            if (response) {
+              window.location.reload();
+            }
+          })
+          .catch((error) => (this.msgError = error));
+      }
+    },
+    onFileChange(e) {
+      console.log(e);
+      this.postImage = e.target.files[0] || e.dataTransfer.files;
+      console.log(this.postImage);
     },
   },
 };
 </script>
+
+<style>
+.input-text {
+  width: 100%;
+}
+</style>

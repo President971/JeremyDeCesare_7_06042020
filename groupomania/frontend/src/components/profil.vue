@@ -16,7 +16,9 @@
       </b-card-text>
 
       <b-button @click="logout()" variant="success"> Déconnexion </b-button>
-      <b-button @click="deleteAccount()" variant="danger"> Supression du Compte </b-button>
+      <b-button @click="deleteAccount()" variant="danger">
+        Supression du Compte
+      </b-button>
     </b-card>
   </b-row>
 </template>
@@ -26,10 +28,10 @@ import axios from "axios";
 import { mapState } from "vuex";
 
 export default {
-  name: "Profile",
+  name: "User",
   data() {
     return {
-      users: [],
+      retourAPI: "",
     };
   },
   mounted: function () {
@@ -54,12 +56,14 @@ export default {
       axios
         .delete("http://localhost:3000/api/user/delete", {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
+            Authorization: "Bearer " + this.$store.state.user.token,
           },
         })
         .then(() => {
+          console.log(this.$store.state.user.token);
           localStorage.clear();
-          location.replace(location.origin + "/login");
+          location.replace(location.origin + "/");
+          this.$store.commit("setStatus", false);
         })
         .catch((error) => console.log(error));
     },

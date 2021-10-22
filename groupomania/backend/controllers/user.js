@@ -16,7 +16,6 @@ exports.signup = (req, res) => {
         res.status(400).json({ error: 'il manque un paramètre' })
     }
 
-    //TO DO => Vérification des saisies user
     let emailOk = verifInput.validEmail(email);
     console.log(emailOk)
     let mdpOK = verifInput.validPassword(password);
@@ -64,7 +63,7 @@ exports.login = (req, res) => {
     }
     //Vérification si user existe
     models.User.findOne({
-        where: { email : email }
+        where: { email: email }
     })
         .then(user => {
             if (user) {
@@ -73,7 +72,9 @@ exports.login = (req, res) => {
                         res.status(200).json({
                             userId: user.id,
                             token: utils.generateToken(user),
-                            isAdmin: user.isAdmin
+                            isAdmin: user.isAdmin,
+                            username: user.username,
+                            email: user.email
                         })
                     } else {
                         res.status(403).json({ error: 'invalid password' });
@@ -90,7 +91,7 @@ exports.login = (req, res) => {
 exports.userProfil = (req, res) => {
     let id = utils.getUserId(req.headers.authorization)
     models.User.findOne({
-        attributes: ['id', 'email', 'username','isAdmin'],
+        attributes: ['id', 'email', 'username', 'isAdmin'],
         where: { id: id }
     })
         .then(user => res.status(200).json(user))
