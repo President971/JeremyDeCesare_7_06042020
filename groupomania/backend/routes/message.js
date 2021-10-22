@@ -1,13 +1,14 @@
-const express = require("express")
-const router = express.Router()
-const messageCtrl = require("../controllers/message")
-const multer = require("../middleware/multer-config")
+//Imports
+const express = require('express');
+const router = express.Router();
+const postCtrl = require('../controllers/post');
+const auth = require('../middleware/auth');
+const multer = require('../middleware/multer-config');
 
-router.get("/", messageCtrl.findAllMessages)
-router.get("/users/:id", messageCtrl.findAllMessagesForOne)
-router.get("/:id", messageCtrl.findOneMessage)
-router.post("/", multer, messageCtrl.createMessage)
-router.put("/:id", multer, messageCtrl.modifyMessage)
-router.delete("/:id", messageCtrl.deleteMessage)
+//Routage
+router.put("/update", auth, multer, postCtrl.update)
+router.post("/create", auth, multer, postCtrl.create);
+router.delete("/delete", postCtrl.delete)
+router.get("/", auth, postCtrl.listMsg);
 
-module.exports = router
+module.exports = router; 
