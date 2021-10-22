@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Discussion",
   data() {
@@ -60,11 +62,21 @@ export default {
       users: [],
     };
   },
-  mounted: function getMessages() {
-    const baseURI = "http://localhost:8080";
-    this.$http.get(baseURI + "/api/messages/").then((result) => {
-      this.users = result.data;
-    });
-  },
+  mounted() {
+    axios
+      .get("http://localhost:3000/api/get", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      })
+      .then(response => {
+        console.log("post", response.data);
+        this.allPosts = response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      }),
+      this.$store.dispatch("getUserInfos");
+  }
 };
 </script>

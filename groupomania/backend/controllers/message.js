@@ -1,132 +1,146 @@
-const models = require("../models")
-const Message = models.messages
-const Comment = models.comments
-const User = models.users
+//Import
+let models = require('../models');
+let utils = require('../utils/jwtUtils');
+const fs = require('fs');
 
-// Tous les messages
-exports.findAllMessages = (req, res, next) => {
-    Message.findAll({
-        include: {
-            model: User,
-            required: true,
-            attributes: ["userName", "avatar", "isActive"]
-        },
-        order: [["id", "DESC"]]
+
+//Création d'un message
+exports.create = (req, res) => {
+    //Declaration de l'url de l'image
+    let attachmentURL
+    //identifier qui créé le message
+    let id = utils.getUserId(req.headers.authorization)
+    models.User.findOne({
+        attributes: ['id', 'email', 'username'],
+        where: { id: id }
     })
-    .then(messages => {
-        const ListeMessages = messages.map(message => {
-            return Object.assign({},
-                {
-                    id: message.id,
-                    createdAt: message.createdAt,
-                    message: message.message,
-                    messageUrl: message.messageUrl,
-                    UserId: message.UserId,
-                    userName: message.User.userName,
-                    avatar: message.User.avatar,
-                    isActive: message.User.isActive
+        .then(user => {
+            if (user !== null) {
+                //Récupération du corps du post
+                let content = req.body.content;
+                if (req.file != undefined) {
+                    attachmentURL = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
                 }
-            )
+                else {
+                    attachmentURL == null
+                };
+                if ((content == 'null' && attachmentURL == null)) {
+                    res.status(400).json({ error: 'Rien à publier' })
+                } else {
+                    models.Post.create({
+                        content: content,
+                        attachement: attachmentURL,
+                        UserId: user.id
+                    })
+                        .then((newPost) => {
+                            res.status(201).json(newPost)
+                        })
+                        .catch((err) => {
+                            res.status(500).json(err)
+                        })
+                };
+            } else {
+                res.status(400).json(error);
+            }
         })
-        res.status(200).json({ ListeMessages })
-    })
-    .catch(error => res.status(400).json({ error }))
+        .catch(error => res.status(500).json(error));
 }
 
-// Tous les messages d'un utilisateur
-exports.findAllMessagesForOne = (req, res, next) => {
-    Message.findAll({
-        where: { UserId: req.params.id },
-        include: {
-            model: User,
-            required: true,
-            attributes: ["userName", "avatar", "isActive"]
-        },
-        order: [["id", "DESC"]]
+//Afficher les posts sur le mur
+exports.listMsg = (req, res) => {
+    models.Post.findAll({
+        include: [{
+            model: models.User,
+            attributes: ['username']
+        }],
+        order: [['createdAt', 'DESC']]
     })
-    .then(messages => {
-        const ListeMessages = messages.map(message => {
-            return Object.assign({},
-                {
-                    id: message.id,
-                    createdAt: message.createdAt,
-                    message: message.message,
-                    messageUrl: message.messageUrl,
-                    UserId: message.UserId,
-                    userName: message.User.userName,
-                    avatar: message.User.avatar,
-                    isActive: message.User.isActive
-                }
-            )
+        .then(posts => {
+            if (posts.length > null) {
+                res.status(200).json(posts)
+            } else {
+                res.status(404).json({ error: 'Pas de post à afficher' })
+            }
         })
-        res.status(200).json({ ListeMessages })
-    })
-    .catch(error => res.status(400).json({ error }))
+        .catch(err => res.status(500).json(err))
 }
 
-// Un seul message
-exports.findOneMessage = (req, res, next) => {
-    const oneMessage = {}
-    Message.findOne({ 
-        where: { id: req.params.id },
-        include: {
-            model: User,
-            required: true,
-            attributes: ["userName", "avatar", "isActive"] 
+//Suppression d'un post
+exports.delete = (req, res) => {
+    //req => userId, postId, user.isAdmin
+    let userOrder = req.body.userIdOrder;
+    //identification du demandeur
+    let id = utils.getUserId(req.headers.authorization)
+    models.User.findOne({
+        attributes: ['id', 'email', 'username', 'isAdmin'],
+        where: { id: id }
+    })
+        .then(user => {
+            //Vérification que le demandeur est soit l'admin soit le poster (vérif aussi sur le front)
+            if (user && (user.isAdmin == true || user.id == userOrder)) {
+                console.log('Suppression du post id :', req.body.postId);
+                models.Post
+                    .findOne({
+                        where: { id: req.body.postId }
+                    })
+                    .then((postFind) => {
+
+                        if (postFind.attachement) {
+                            const filename = postFind.attachement.split('/images/')[1];
+                            console.log("teseeeest", filename);
+                            fs.unlink(`images/${filename}`, () => {
+                                models.Post
+                                    .destroy({
+                                        where: { id: postFind.id }
+                                    })
+                                    .then(() => res.end())
+                                    .catch(err => res.status(500).json(err))
+                            })
+                        }
+                        else {
+                            models.Post
+                                .destroy({
+                                    where: { id: postFind.id }
+                                })
+                                .then(() => res.end())
+                                .catch(err => res.status(500).json(err))
+                        }
+                    })
+                    .catch(err => res.status(500).json(err))
+            } else { res.status(403).json('Utilisateur non autorisé à supprimer ce post') }
+        })
+        .catch(error => res.status(500).json(error));
+};
+
+//Modification d'un post
+exports.update = (req, res) => {
+    //récupération de l'id du demandeur pour vérification
+    let userOrder = req.body.userIdOrder;
+    //identification du demandeur
+    let id = utils.getUserId(req.headers.authorization);
+    models.User.findOne({
+        attributes: ['id', 'email', 'username', 'isAdmin'],
+        where: { id: id }
+    })
+        .then(user => {
+            //Vérification que le demandeur est soit l'admin soit le poster (vérif aussi sur le front)
+            if (user && (user.isAdmin == true || user.id == userOrder)) {
+                console.log('Modif ok pour le post :', req.body.postId);
+                models.Post
+                    .update(
+                        {
+                            content: req.body.newText,
+                            attachement: req.body.newImg
+                        },
+                        { where: { id: req.body.postId } }
+                    )
+                    .then(() => res.end())
+                    .catch(err => res.status(500).json(err))
+            }
+            else {
+                res.status(401).json({ error: 'Utilisateur non autorisé à modifier ce post' })
+            }
         }
-    })
-    .then(message => {
-        oneMessage.id = message.id
-        oneMessage.userId = message.UserId
-        oneMessage.avatar = message.User.avatar
-        oneMessage.userName = message.User.userName
-        oneMessage.isActive = message.User.isActive
-        oneMessage.createdAt = message.createdAt
-        oneMessage.message = message.message
-        oneMessage.messageUrl = message.messageUrl
-    })
-    .then(() => {
-        Comment.count({ where: { MessageId: req.params.id }})
-        .then(commentCount => {
-            oneMessage.commentaire = commentCount
-            res.status(200).json(oneMessage)
-        })
-    })
-    .catch(error => res.status(404).json({ error }))
-}
-
-// Créer un message
-exports.createMessage = (req, res, next) => {
-    let varImage =""
-    if (req.file) { varImage = `${req.protocol}://${req.get("host")}/images/${req.file.filename}` }
-    const message = new Message(
-        {
-            UserId: req.body.UserId,
-            message: req.body.message,
-            messageUrl: varImage
-        }
-    )
-    message.save()
-        .then((retour) => res.status(201).json({ message: "Message créé !" }))
-        .catch(error => res.status(400).json({ error }))
-}
-
-// Modifier un message
-exports.modifyMessage = (req, res, next) => {
-    const messageObject = req.file ?
-      {
-        ...req.body.message,
-        messageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-      } : { ... req.body}
-
-    Message.update({ ...messageObject, id:  req.params.id}, { where: { id: req.params.id }})
-    .then(() => res.status(200).json({ message: "Message modifié !" }))
-    .catch(error => res.status(400).json({ error }))
-}
-
-// Supprimer un message
-exports.deleteMessage = (req, res, next) => {
-  Message.destroy({ where: { id: req.params.id }})
-        .then(() => res.status(200).json({ message: "Message supprimé !" }))
-        .catch(error => res.status(400).json({ error }))
+        )
+        .catch(error => res.status(500).json(error));
 }
