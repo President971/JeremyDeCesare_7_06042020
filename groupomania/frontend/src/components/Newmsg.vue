@@ -82,7 +82,7 @@ export default {
         content: this.content,
         attachment: this.attachment,
       };
-      const baseURI = "http://localhost:8080";
+      const baseURI = "http://localhost:3000";
       this.$http.post(baseURI + "/api/messages/new", newMessage);
       console.log(newMessage);
     },

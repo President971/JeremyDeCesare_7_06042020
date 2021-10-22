@@ -29,12 +29,11 @@ if (!user) {
 export default new Vuex.Store({
   state: {
     status: '',
-
+    user: user,
     userInfos: {
-      userName: '',
+      username: '',
       email: '',
       password: '',
-      bio: '',
       attachment: '',
     },
   },
@@ -62,7 +61,7 @@ export default new Vuex.Store({
     login: ({ commit }, userInfos) => {
       commit('setStatus', 'loading');
       return new Promise((resolve, reject) => {
-        instance.post('/auth/login/', userInfos)
+        instance.post('/user/login', userInfos)
           .then(function (response) {
             commit('setStatus', '');
             commit('logUser', response.data);
@@ -78,7 +77,7 @@ export default new Vuex.Store({
       commit('setStatus', 'loading');
       return new Promise((resolve, reject) => {
         commit;
-        instance.post('/auth/signup/', userInfos)
+        instance.post('/user/signup', userInfos)
           .then(function (response) {
             commit('setStatus', 'created');
             resolve(response);
@@ -90,7 +89,7 @@ export default new Vuex.Store({
       });
     },
     getUserInfos: ({ commit }) => {
-      instance.get('/user/;id/')
+      instance.get('/user/me/')
         .then(function (response) {
           commit('userInfos', response.data);
         })
@@ -98,7 +97,7 @@ export default new Vuex.Store({
         });
     },
     updateUserInfos: ({ commit }, updateUserInfos) => {
-      instance.put('/user/:id/', updateUserInfos).then(function () {
+      instance.put('/user/me/', updateUserInfos).then(function () {
         commit('userInfos', updateUserInfos);
       })
     },

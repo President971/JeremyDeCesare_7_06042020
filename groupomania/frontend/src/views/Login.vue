@@ -37,7 +37,7 @@
               required
             ></v-text-field>
             <v-text-field
-              v-model="userName"
+              v-model="username"
               label="Nom d'utilisateur"
               required
             ></v-text-field>
@@ -96,7 +96,7 @@ export default {
     return {
       mode: "login",
       email: "",
-      userName: "",
+      username: "",
       password: "",
     };
   },
@@ -105,7 +105,7 @@ export default {
       if (this.mode == "create") {
         if (
           this.email != "" &&
-          this.userName != "" &&
+          this.username != "" &&
           this.password != ""
         ) {
           return true;
@@ -150,7 +150,7 @@ export default {
       this.$store
         .dispatch("createAccount", {
           email: this.email,
-          userName: this.userName,
+          username: this.username,
           password: this.password,
         })
         .then(
