@@ -78,7 +78,6 @@ export default {
         msgReturn.classList.add("text-danger");
         this.msgError = "Rien à publier";
       } else {
-        console.log(fd);
         axios
           .post("http://localhost:3000/api/post/create", fd, {
             headers: {

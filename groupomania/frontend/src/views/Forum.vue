@@ -30,7 +30,7 @@
             <p>{{ post.content }}</p>
           </b-card-text>
           <v-col cols="12" md="6">
-           //
+           <answer />
           </v-col>
         </b-card>
       </v-col>
@@ -42,11 +42,13 @@
 import axios from "axios";
 import Navbar from "../components/Navbar.vue";
 import Newmsg from "../components/Newmsg.vue";
+import Answer from '../components/Answer.vue';
 
 export default {
   components: {
     Navbar,
     Newmsg,
+    Answer,
   },
   name: "Discussion",
   data() {
@@ -62,7 +64,6 @@ export default {
         },
       })
       .then((response) => {
-        console.log("post", response.data);
         this.allPosts = response.data;
       });
   },
