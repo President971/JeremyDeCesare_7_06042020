@@ -40,9 +40,9 @@
 
 <script>
 import axios from "axios";
-import Navbar from "../components/Navbar.vue";
-import Newmsg from "../components/Newmsg.vue";
-import Answer from '../components/Answer.vue';
+import Navbar from "../components/Navbar";
+import Newmsg from "../components/Newmsg";
+import Answer from "../components/Answer"
 
 export default {
   components: {
