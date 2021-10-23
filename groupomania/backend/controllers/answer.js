@@ -16,7 +16,7 @@ exports.createAnswer = (req, res, next) => {
 exports.getAllAnswers = (req, res, next) => {
     Answer.findAll({
         where: { messageId: req.params.id },
-        //include: ["user", "messages"]
+       //include: ["user", "messages"]
     }
     )
         .then((answers) => res.status(200).json(answers))

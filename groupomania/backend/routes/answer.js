@@ -1,8 +1,7 @@
 // Logique de routing //
 const express = require('express');
 const router = express.Router();
-
-const answerControl = require('../controllers/postAnswer');
+const answerControl = require('../controllers/answer');
 const auth = require('../middleware/auth');
 
 

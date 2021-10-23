@@ -1,5 +1,5 @@
 <template>
-  <v-container  >
+  <v-container>
     <v-row>
       <v-col>
         <navbar />
@@ -12,31 +12,65 @@
     </v-row>
     <v-row>
       <v-col>
-        <discussion />
+        <b-card
+          v-for="post in allPosts"
+          :key="post.id"
+          no-body
+          class="mx-auto bg mb-4"
+          style="max-width: 760px"
+        >
+          <img
+            v-if="post.attachement"
+            :src="post.attachement"
+            alt="Card image"
+            img-left
+            class="mb-3"
+          />
+          <b-card-text>
+            <p>{{ post.content }}</p>
+          </b-card-text>
+          <v-col cols="12" md="6">
+            <answer />
+          </v-col>
+        </b-card>
       </v-col>
     </v-row>
   </v-container>
 </template>
+
 <script>
-import Discussion from '../components/Discussion.vue';
-import Navbar from '../components/Navbar.vue';
-import Newmsg from '../components/Newmsg.vue';
+import axios from "axios";
+import Navbar from "../components/Navbar.vue";
+import Newmsg from "../components/Newmsg.vue";
+import Answer from "../components/Answer.vue";
 
 export default {
-  name: "Forum",
-
   components: {
     Navbar,
-    Discussion,
-    Newmsg
+    Newmsg,
+    Answer
+  },
+  name: "Discussion",
+  data() {
+    return {
+      allPosts: [],
+    };
+  },
+  mounted() {
+    axios
+      .get("http://localhost:3000/api/post", {
+        headers: {
+          Authorization: "Bearer " + this.$store.state.user.token,
+        },
+      })
+      .then((response) => {
+        console.log("post", response.data);
+        this.allPosts = response.data;
+      });
   },
 };
 </script>
 
 
-<style lang="css" scoped>
-.container {
-  background-image: (url('~@/assets/icon.png')) ;
-}
-
+<style>
 </style>
