@@ -5,9 +5,7 @@
         <b-col>
           <b-card-body>
             <div class="mb-4">
-              <b-avatar variant="info"
-                ></b-avatar
-              >
+              <b-avatar variant="info"></b-avatar>
               <span> {{ user.username }} </span>
               <h3>Créer un post</h3>
             </div>
@@ -48,12 +46,7 @@ export default {
       msgError: "",
     };
   },
-  mounted: function () {
-    if (this.$store.state.user.userId == -1) {
-      this.$router.push("/");
-      return;
-    }
-  },
+  props: {},
   computed: {
     ...mapState(["user", "editOption"]),
   },

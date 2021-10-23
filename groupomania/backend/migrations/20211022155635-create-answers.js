@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Answer', {
+    await queryInterface.createTable('Answers', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -15,6 +15,7 @@ module.exports = {
       messageId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        value: '1',
         onDelete: 'CASCADE',
           references: {
           model: "Posts",

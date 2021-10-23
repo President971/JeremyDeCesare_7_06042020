@@ -1,18 +1,11 @@
 <template>
   <b-container fluid>
-    <b-row>
-      <b-col>
-        <h1>Dernières Publication</h1>
-      </b-col>
-    </b-row>
     <b-card no-body class="overflow-hidden mx-auto bg" style="max-width: 760px">
       <b-row no-gutters>
         <b-col>
           <b-card-body>
             <div class="mb-4">
-              <b-avatar variant="info"
-                ></b-avatar
-              >
+              <b-avatar variant="info"></b-avatar>
               <span> {{ user.username }} </span>
               <h3>Créer un post</h3>
             </div>
@@ -77,6 +70,9 @@ export default {
         let msgReturn = document.getElementById("msgReturnAPI");
         msgReturn.classList.add("text-danger");
         this.msgError = "Rien à publier";
+        this.$store.dispatch("messageId", {
+          messageId: this.postId,
+        });
       } else {
         axios
           .post("http://localhost:3000/api/post/create", fd, {

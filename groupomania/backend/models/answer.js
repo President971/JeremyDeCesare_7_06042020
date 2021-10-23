@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     models.Answer.belongsTo(models.Post, {
       foreignKey: {
-        allowNull: false
+        allowNull: true
       }
     });
     models.Answer.belongsTo(models.User, {

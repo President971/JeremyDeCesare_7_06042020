@@ -34,7 +34,7 @@
           <b-card-text>
             <p>{{ post.content }}</p>
           </b-card-text>
-          <answer />
+          <answer  />
         </b-card>
       </b-col>
     </b-row>
@@ -59,7 +59,22 @@ export default {
       allPosts: [],
     };
   },
+  //methods: {
+    //addComment(postId){
+    //je recupere les données de mon formulaire (qui n'existe pas ici, on est d'accord)
+    //j'envoie l'objet a l'api
+    //let dataToSend = {
+     // "userid" : id de mo user,
+     // etc,
+     // "postId": postId
+      //}
+   // }
+ // },
   mounted() {
+    if (this.$store.state.user.userId == -1) {
+      this.$router.push("/");
+      return;
+    }
     axios
       .get("http://localhost:3000/api/post", {
         headers: {
