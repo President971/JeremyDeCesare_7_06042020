@@ -1,11 +1,10 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const PostAnswer = sequelize.define('Answer', {
+  const Answer = sequelize.define('Answer', {
     content: DataTypes.STRING,
-    attachement: DataTypes.STRING,
   },
     {});
-  PostAnswer.associate = function (models) {
+  Answer.associate = function (models) {
     // associations can be defined here
     models.Answer.belongsTo(models.Post, {
       foreignKey: {
@@ -18,5 +17,5 @@ module.exports = (sequelize, DataTypes) => {
       }
     });
   };
-  return PostAnswer;
+  return Answer;
 };

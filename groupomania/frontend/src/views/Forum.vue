@@ -1,17 +1,22 @@
-<template>
-  <v-container>
-    <v-row>
-      <v-col>
+<template >
+  <b-container>
+    <b-row>
+      <b-col>
         <navbar />
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
         <newmsg />
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <h1>Dernières Publication</h1>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
         <b-card
           v-for="post in allPosts"
           :key="post.id"
@@ -29,20 +34,18 @@
           <b-card-text>
             <p>{{ post.content }}</p>
           </b-card-text>
-          <v-col cols="12" md="6">
-           <answer />
-          </v-col>
+          <answer />
         </b-card>
-      </v-col>
-    </v-row>
-  </v-container>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import Newmsg from "../components/Newmsg";
-import Answer from "../components/Answer"
+import Answer from "../components/Answer";
 
 export default {
   components: {
