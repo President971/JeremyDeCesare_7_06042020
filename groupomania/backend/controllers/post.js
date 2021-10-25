@@ -64,27 +64,6 @@ exports.listMsg = (req, res) => {
         })
         .catch(err => res.status(500).json(err))
 }
-// Obtention d'un message //
-exports.getOneMessage = (req, res, next) => {
-    models.Post.findByPk(req.params.id,
-        {
-            include: [
-                {
-                    model: models.User,
-                    attributes: ['id', 'username', 'postId']
-                },
-                {
-                    model: models.Answer,
-                    attributes: ['content'],
-                    include: { model: models.User, attributes: ['id', 'username', 'postId'] }
-                },
-            ]
-        }
-    )
-        .then(message => res.status(200).json(message))
-        .catch(error => res.status(404).json({ error }));
-};
-
 //Suppression d'un post
 exports.delete = (req, res) => {
     //req => userId, postId, user.isAdmin

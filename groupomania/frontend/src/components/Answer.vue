@@ -3,17 +3,28 @@
     <b-card no-body class="overflow-hidden mx-auto bg" style="max-width: 760px">
       <b-row no-gutters>
         <b-col>
+          <b-card
+            v-for="answer in allAnswers"
+            :key="answer.postid"
+            no-body
+            class="mx-auto bg mb-4"
+            style="max-width: 760px"
+          >
+            <b-card-text>
+              <p>{{ answer.content }}</p>
+            </b-card-text>
+          </b-card>
           <b-card-body>
             <div class="mb-4">
-              <h3>Créer un post</h3>
+              <h5>Mettre un commentaire</h5>
             </div>
             <b-row>
               <b-form-textarea
                 id="input_text"
                 v-model="content"
                 placeholder="Ajouter un texte"
-                rows="4"
-                max-rows="6"
+                rows="2"
+                max-rows="3"
               ></b-form-textarea>
             </b-row>
             <b-row>
@@ -31,7 +42,6 @@
   </b-container>
 </template>
 
-
 <script>
 import axios from "axios";
 import { mapState } from "vuex";
@@ -42,16 +52,33 @@ export default {
     return {
       content: null,
       msgError: "",
+      answer: "",
+      allAnswers: [],
     };
   },
-  props: {},
+  mounted() {
+    axios
+      .get("http://localhost:3000/api/answer", {
+        headers: {
+          Authorization: "Bearer " + this.$store.state.user.token,
+        },
+      })
+      .then((response) => {
+        this.allAnswers = response.data;
+      });
+  },
+  props: {
+    postid: Number,
+  },
   computed: {
     ...mapState(["user", "editOption"]),
   },
   methods: {
     newAnswer() {
+      console.log(this.postid);
       const fd = new FormData();
       fd.append("content", this.content);
+      fd.append("postId", this.postid);
       if (fd.get("content") == "null") {
         let msgReturn = document.getElementById("msgReturnAPI");
         msgReturn.classList.add("text-danger");

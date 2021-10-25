@@ -23,6 +23,7 @@
               required
             ></v-text-field>
             <v-text-field
+              type="password"
               v-model="password"
               label="Mot de Passe"
               required
@@ -42,6 +43,7 @@
               required
             ></v-text-field>
             <v-text-field
+              type="password"
               v-model="password"
               label="Mot de Passe"
               required
@@ -89,10 +91,9 @@
 <script>
 import { mapState } from "vuex";
 
-
 export default {
   name: "Login",
-  data: function () {
+  data: function() {
     return {
       mode: "login",
       email: "",
@@ -101,13 +102,9 @@ export default {
     };
   },
   computed: {
-    validatedFields: function () {
+    validatedFields: function() {
       if (this.mode == "create") {
-        if (
-          this.email != "" &&
-          this.username != "" &&
-          this.password != ""
-        ) {
+        if (this.email != "" && this.username != "" && this.password != "") {
           return true;
         } else {
           return false;
@@ -123,13 +120,13 @@ export default {
     ...mapState(["status"]),
   },
   methods: {
-    switchToCreateAccount: function () {
+    switchToCreateAccount: function() {
       this.mode = "create";
     },
-    switchToLogin: function () {
+    switchToLogin: function() {
       this.mode = "login";
     },
-    login: function () {
+    login: function() {
       const self = this;
       this.$store
         .dispatch("login", {
@@ -137,15 +134,15 @@ export default {
           password: this.password,
         })
         .then(
-          function () {
+          function() {
             self.$router.push("/forum");
           },
-          function (error) {
+          function(error) {
             console.log(error);
           }
         );
     },
-    createAccount: function () {
+    createAccount: function() {
       const self = this;
       this.$store
         .dispatch("createAccount", {
@@ -154,10 +151,10 @@ export default {
           password: this.password,
         })
         .then(
-          function () {
+          function() {
             self.login();
           },
-          function (error) {
+          function(error) {
             console.log(error);
           }
         );
@@ -165,5 +162,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

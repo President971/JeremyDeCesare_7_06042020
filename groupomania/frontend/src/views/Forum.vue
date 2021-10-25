@@ -34,7 +34,7 @@
           <b-card-text>
             <p>{{ post.content }}</p>
           </b-card-text>
-          <answer  />
+          <answer :postid="post.id" />
         </b-card>
       </b-col>
     </b-row>
@@ -57,7 +57,6 @@ export default {
   data() {
     return {
       allPosts: [],
-      allAnswers: []
     };
   },
   mounted() {
@@ -74,16 +73,6 @@ export default {
       .then((response) => {
         this.allPosts = response.data;
       });
-        axios
-      .get("http://localhost:3000/api/answer", {
-        headers: {
-          Authorization: "Bearer " + this.$store.state.user.token,
-        },
-      })
-      .then((response) => {
-        this.allAnswers = response.data;
-      });
-
   },
 };
 </script>
