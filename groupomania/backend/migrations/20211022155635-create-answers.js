@@ -12,10 +12,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT
       },
-      messageId: {
+      postId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        value: '1',
         onDelete: 'CASCADE',
           references: {
           model: "Posts",

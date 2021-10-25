@@ -57,19 +57,9 @@ export default {
   data() {
     return {
       allPosts: [],
+      allAnswers: []
     };
   },
-  //methods: {
-    //addComment(postId){
-    //je recupere les données de mon formulaire (qui n'existe pas ici, on est d'accord)
-    //j'envoie l'objet a l'api
-    //let dataToSend = {
-     // "userid" : id de mo user,
-     // etc,
-     // "postId": postId
-      //}
-   // }
- // },
   mounted() {
     if (this.$store.state.user.userId == -1) {
       this.$router.push("/");
@@ -84,6 +74,16 @@ export default {
       .then((response) => {
         this.allPosts = response.data;
       });
+        axios
+      .get("http://localhost:3000/api/answer", {
+        headers: {
+          Authorization: "Bearer " + this.$store.state.user.token,
+        },
+      })
+      .then((response) => {
+        this.allAnswers = response.data;
+      });
+
   },
 };
 </script>

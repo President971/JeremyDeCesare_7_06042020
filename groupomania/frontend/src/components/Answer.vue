@@ -5,8 +5,6 @@
         <b-col>
           <b-card-body>
             <div class="mb-4">
-              <b-avatar variant="info"></b-avatar>
-              <span> {{ user.username }} </span>
               <h3>Créer un post</h3>
             </div>
             <b-row>
