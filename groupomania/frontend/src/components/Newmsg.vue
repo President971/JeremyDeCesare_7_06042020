@@ -4,11 +4,15 @@
       <b-row no-gutters>
         <b-col>
           <b-card-body>
-            <div class="mb-4">
-              <b-avatar variant="info"></b-avatar>
-              <span> {{ user.username }} </span>
+            <b-row class="mb-4">
+              <b-col>
+                <v-icon large color="red darken-2">
+                  mdi-account
+                </v-icon>
+                <span> {{ user.username }} </span>
+              </b-col>
               <h3>Créer un post</h3>
-            </div>
+            </b-row>
             <b-row>
               <b-form-textarea
                 id="input_text"
@@ -52,7 +56,7 @@ export default {
       msgError: "",
     };
   },
-  mounted: function () {
+  mounted: function() {
     if (this.$store.state.user.userId == -1) {
       this.$router.push("/");
       return;

@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Answer = sequelize.define('Answer', {
     content: DataTypes.STRING,
+    PostId: DataTypes.NUMBER,
   },
     {});
   Answer.associate = function (models) {

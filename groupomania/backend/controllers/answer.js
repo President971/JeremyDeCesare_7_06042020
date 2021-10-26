@@ -21,7 +21,8 @@ exports.create = (req, res) => {
                 } else {
                     models.Answer.create({
                         content: content,
-                        UserId: user.id
+                        UserId: user.id,
+                        PostId: req.body.postId 
                     })
                         .then((newAnswer) => {
                             res.status(201).json(newAnswer)
