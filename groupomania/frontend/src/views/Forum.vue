@@ -1,5 +1,5 @@
 <template >
-  <b-container>
+  <b-container id="forum" class="forum">
     <b-row>
       <b-col>
         <navbar />
@@ -10,10 +10,8 @@
         <newmsg />
       </b-col>
     </b-row>
-    <b-row>
-      <b-col>
-        <h1>Dernières Publication</h1>
-      </b-col>
+    <b-row >
+        <h1> Dernières Publication </h1>
     </b-row>
     <b-row>
       <b-col>
@@ -79,4 +77,8 @@ export default {
 
 
 <style>
+.forum {
+  background-image: url('~@/assets/icon.svg');
+  background-position: center;
+}
 </style>

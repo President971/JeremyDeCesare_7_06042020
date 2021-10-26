@@ -1,14 +1,14 @@
 <template>
-  <b-container>
+  <b-container >
     <navbar />
-    <b-row>
+    <b-row class="profil">
       <b-card
         img-src="https://placekitten.com/300/300"
         img-alt="Image"
         img-top
         tag="article"
         style="max-width: 20rem"
-        class="mx-auto bg"
+        class="mx-auto bg cardProfil"
       >
         <h1>Mon Profil</h1>
         <b-card-text>
@@ -16,8 +16,6 @@
           <p>Mon Email : {{ user.email }}</p>
           <img />
         </b-card-text>
-
-        <b-button @click="logout()" variant="success"> Déconnexion </b-button>
         <b-button @click="deleteAccount()" variant="danger">
           Supression du Compte
         </b-button>
@@ -34,14 +32,14 @@ import { mapState } from "vuex";
 export default {
   name: "User",
   components: {
-    Navbar
+    Navbar,
   },
   data() {
     return {
       retourAPI: "",
     };
   },
-  mounted: function () {
+  mounted: function() {
     console.log(this.$store.state.user);
     if (this.$store.state.user.userId == -1) {
       this.$router.push("/");
@@ -79,4 +77,12 @@ export default {
 </script>
 
 <style>
+.profil {
+  background-image: url("~@/assets/icon.svg");
+  background-size:45%;
+  background-position: center;
+}
+.cardProfil {
+  padding-top: 1rem;
+}
 </style>

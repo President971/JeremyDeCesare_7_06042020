@@ -5,15 +5,13 @@
         <b-col></b-col>
         <b-navbar-brand
           to="/Forum"
-          img
-          src="../assets/icon.png"
+            fluid
           class="mx-auto bg"
           ><img
             fluid
             src="../assets/icon-left-font.png"
             alt="Groupomania"
-            height="480px"
-            class="mx-auto bg"
+            class="mx-auto bg responsive"
           />
         </b-navbar-brand>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -50,3 +48,9 @@ export default {
   },
 };
 </script>
+<style>
+.responsive {
+  width: 100%;
+  height: 480px;
+}
+</style>

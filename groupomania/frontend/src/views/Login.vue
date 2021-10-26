@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="login">
     <v-row>
       <v-card persistent max-width="560" class="mx-auto my-10 bg">
         <v-img height="240" src="..\assets\icon-left-font.png"></v-img>
@@ -162,4 +162,5 @@ export default {
   },
 };
 </script>
-<style scoped></style>
+<style>
+</style>
