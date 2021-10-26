@@ -10,16 +10,15 @@
         <newmsg />
       </b-col>
     </b-row>
-    <b-row>
-      <h1>Dernières Publication</h1>
+    <b-row align="center" class="my-10">
+      <h1>Dernières Publications</h1>
     </b-row>
     <b-row>
       <b-col>
         <b-card
           v-for="post in allPosts"
           :key="post.id"
-          no-body
-          class="mx-auto bg mb-4"
+          class="mx-auto bg mb-4 pt-4"
           style="max-width: 760px"
         >
           <b-row>
@@ -31,29 +30,36 @@
               class="mb-3"
             />
           </b-row>
-          <b-row>
-            <b-col>
-              <v-icon large color="red darken-2">
-                mdi-account
-              </v-icon>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col>
-              <b-card-text>
-                <p>{{ post.content }}</p>
-              </b-card-text>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col>
-              <b-button variant="danger"> Supprimer </b-button>
-            </b-col>
-          </b-row>
+          <v-card
+            class="mx-auto bg mb-4 my-8"
+            color="red"
+            dark
+            max-width="760"
+          >
+            <b-row>
+              <v-card-title>
+                <v-icon large left>
+                  mdi-account
+                </v-icon>
+                <span class="text-h6 font-weight-light">
+                  USER
+                </span>
+              </v-card-title>
+            </b-row>
+            <b-row>
+              <b-col>
+                <v-card-text class="text-h4 font-bold">
+                  <span class="white--text"> {{ post.content }} </span>
+                </v-card-text>
+              </b-col>
+            </b-row>
+            <b-row >
+              <b-col align="center" justify="end">
+                <v-btn> Supprimer </v-btn>
+              </b-col>
+            </b-row>
+          </v-card>
           <answer :postid="post.id" class="answer" />
-        </b-card>
-        <b-card>
-          
         </b-card>
       </b-col>
     </b-row>
@@ -102,7 +108,7 @@ export default {
   background-position: center;
 }
 .answer {
-  padding-bottom: 1.5rem;
-  margin-top: 1.5rem;
+  padding-bottom: 2rem;
+  margin-top: 2rem;
 }
 </style>

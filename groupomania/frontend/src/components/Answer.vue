@@ -5,7 +5,7 @@
         v-for="answer in allAnswers"
         :key="answer.postid"
         class="mx-auto bg mb-4"
-        color="red darken-1"
+        color="#ffd7d7"
         dark
         max-width="760"
       >
@@ -13,35 +13,31 @@
           <v-icon large left>
             mdi-account
           </v-icon>
-          <span class="text-h6 font-weight-light"> {{ user.username }} </span>
+          <span class="text-h6 font-weight-light black--text"> {{ user.username }} </span>
         </v-card-title>
 
-        <v-card-text class="text-h5 font-weight-bold">
-          {{ answer.content }}
+        <v-card-text class="text-h4 ">
+          <span class="black--text"> {{ answer.content }} </span>
         </v-card-text>
       </v-card>
-      <b-card-body>
-        <div class="mb-4">
-          <h5>Mettre un commentaire</h5>
-        </div>
+      <v-card>
+        <div class="mb-4"></div>
         <b-row>
-          <b-form-textarea
-            id="input_text"
+          <v-textarea
+            outlined
             v-model="content"
-            placeholder="Ajouter un texte"
-            rows="2"
-            max-rows="3"
-          ></b-form-textarea>
+            label="Ecrivez votre commentaire"
+          ></v-textarea>
         </b-row>
         <b-row>
           <!-- Styled -->
           <b-col>
-            <b-button @click="newAnswer()" variant="danger" class="mt-4">
+            <v-btn @click="newAnswer()" color="red">
               Poster
-            </b-button>
+            </v-btn>
           </b-col>
         </b-row>
-      </b-card-body>
+      </v-card>
     </b-row>
   </b-container>
 </template>

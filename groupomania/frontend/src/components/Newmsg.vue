@@ -1,6 +1,10 @@
 <template>
   <b-container fluid>
-    <b-card no-body class="overflow-hidden mx-auto bg" style="max-width: 760px">
+    <v-card
+      elevation="10"
+      class="overflow-hidden mx-auto bg"
+      style="max-width: 760px"
+    >
       <b-row no-gutters>
         <b-col>
           <b-card-body>
@@ -11,36 +15,34 @@
                 </v-icon>
                 <span> {{ user.username }} </span>
               </b-col>
-              <h3>Créer un post</h3>
             </b-row>
             <b-row>
-              <b-form-textarea
-                id="input_text"
+              <v-textarea
+                outlined
                 v-model="content"
-                placeholder="Ajouter un texte"
-                rows="4"
-                max-rows="6"
-              ></b-form-textarea>
+                name="input-7-4"
+                label="Ecrivez votre message"
+              ></v-textarea>
             </b-row>
             <b-row>
               <!-- Styled -->
               <b-col>
-                <b-form-file
+                <v-file-input
+                  label="File input"
                   v-model="postImage"
-                  class="mt-4"
-                  plain
-                ></b-form-file>
+                  prepend-icon="mdi-camera"
+                ></v-file-input>
               </b-col>
-              <b-col>
-                <b-button @click="newMessage()" variant="danger" class="mt-4">
+              <b-col align="center" justify="end">
+                <v-btn @click="newMessage()" color="red">
                   Poster
-                </b-button>
+                </v-btn>
               </b-col>
             </b-row>
           </b-card-body>
         </b-col>
       </b-row>
-    </b-card>
+    </v-card>
   </b-container>
 </template>
 
