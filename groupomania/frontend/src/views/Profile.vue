@@ -1,5 +1,5 @@
 <template>
-  <b-container >
+  <b-container class="mb-10">
     <navbar />
     <b-row class="profil">
       <b-card

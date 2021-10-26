@@ -16,7 +16,8 @@
                 <span> {{ user.username }} </span>
               </b-col>
             </b-row>
-            <b-row>
+            <b-row  
+          class="m-auto">
               <v-textarea
                 outlined
                 v-model="content"
