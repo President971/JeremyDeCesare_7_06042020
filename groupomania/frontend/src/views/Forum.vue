@@ -30,12 +30,7 @@
               class="mb-3"
             />
           </b-row>
-          <v-card
-            class="mx-auto bg mb-4 my-8"
-            color="red"
-            dark
-            max-width="760"
-          >
+          <v-card class="mx-auto bg mb-4 my-8" color="red" dark max-width="760">
             <b-row>
               <v-card-title>
                 <v-icon large left>
@@ -53,11 +48,11 @@
                 </v-card-text>
               </b-col>
             </b-row>
-            <b-row >
-              <b-col align="center" justify="end">
-                <v-btn> Supprimer </v-btn>
-              </b-col>
-            </b-row>
+            <v-row>
+              <v-col align="center" justify="end">
+                <v-btn @click="deletePost()"> Supprimer </v-btn>
+              </v-col>
+            </v-row>
           </v-card>
           <answer :postid="post.id" class="answer" />
         </b-card>
@@ -98,6 +93,20 @@ export default {
       .then((response) => {
         this.allPosts = response.data;
       });
+  },
+  methods: {
+    deletePost(postid) {
+      axios
+        .delete(`http://localhost:3000/api/post/delete${ postid }`, {
+          headers: {
+            Authorization: "Bearer " + this.$store.state.user.token,
+          },
+        })
+        .then(() => {
+          window.location.reload();
+        })
+        .catch((error) => console.log(error));
+    },
   },
 };
 </script>

@@ -13,12 +13,17 @@
           <v-icon large left>
             mdi-account
           </v-icon>
-          <span class="text-h6 font-weight-light black--text"> {{ user.username }} </span>
+          <span class="text-h6 font-weight-light black--text">
+            {{ user.username }}
+          </span>
         </v-card-title>
 
         <v-card-text class="text-h4 ">
           <span class="black--text"> {{ answer.content }} </span>
         </v-card-text>
+          <b-col align="center" justify="end">
+            <v-btn > Supprimer </v-btn>
+          </b-col>
       </v-card>
       <v-card>
         <div class="mb-4"></div>

@@ -77,9 +77,6 @@ export default {
         let msgReturn = document.getElementById("msgReturnAPI");
         msgReturn.classList.add("text-danger");
         this.msgError = "Rien à publier";
-        this.$store.dispatch("messageId", {
-          messageId: this.postId,
-        });
       } else {
         axios
           .post("http://localhost:3000/api/post/create", fd, {

@@ -28,7 +28,6 @@ if (!user) {
 
 export default new Vuex.Store({
   state: {
-    messageId: '',
     status: '',
     user: user,
     userInfos: {

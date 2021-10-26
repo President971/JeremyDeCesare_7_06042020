@@ -75,18 +75,17 @@ exports.delete = (req, res) => {
         where: { id: id }
     })
         .then(user => {
-            //Vérification que le demandeur est soit l'admin soit le poster (vérif aussi sur le front)
+            //Vérification que le demandeur est soit l'admin soit le poster
             if (user && (user.isAdmin == true || user.id == userOrder)) {
                 console.log('Suppression du post id :', req.body.postId);
                 models.Post
                     .findOne({
-                        where: { id: req.body.postId }
+                        where: { id: req.body.id }
                     })
                     .then((postFind) => {
 
                         if (postFind.attachement) {
                             const filename = postFind.attachement.split('/images/')[1];
-                            console.log("teseeeest", filename);
                             fs.unlink(`images/${filename}`, () => {
                                 models.Post
                                     .destroy({

@@ -16,9 +16,11 @@
           <p>Mon Email : {{ user.email }}</p>
           <img />
         </b-card-text>
-        <b-button @click="deleteAccount()" variant="danger">
-          Supression du Compte
-        </b-button>
+        <v-row>
+          <v-col align="center" justify="end">
+            <v-btn @click="deleteAccount()" color="red"> Suppression du Compte </v-btn>
+          </v-col>
+        </v-row>
       </b-card>
     </b-row>
   </b-container>
@@ -65,7 +67,6 @@ export default {
           },
         })
         .then(() => {
-          console.log(this.$store.state.user.token);
           localStorage.clear();
           location.replace(location.origin + "/");
           this.$store.commit("setStatus", false);
@@ -79,7 +80,7 @@ export default {
 <style>
 .profil {
   background-image: url("~@/assets/icon.svg");
-  background-size:45%;
+  background-size: 45%;
   background-position: center;
 }
 .cardProfil {
