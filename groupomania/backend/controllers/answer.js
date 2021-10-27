@@ -22,7 +22,7 @@ exports.create = (req, res) => {
                     models.Answer.create({
                         content: content,
                         UserId: user.id,
-                        PostId: req.body.postId 
+                        PostId: req.body.postId
                     })
                         .then((newAnswer) => {
                             res.status(201).json(newAnswer)
@@ -56,49 +56,14 @@ exports.listMsg = (req, res) => {
         })
         .catch(err => res.status(500).json(err))
 }
-//Suppression d'une answer
-exports.delete = (req, res) => {
-    //req => userId, answerId, user.isAdmin
-    let userOrder = req.body.userIdOrder;
-    //identification du demandeur
-    let id = utils.getUserId(req.headers.authorization)
-    models.User.findOne({
-        attributes: ['id', 'email', 'username', 'isAdmin'],
-        where: { id: id }
-    })
-        .then(user => {
-            //Vérification que le demandeur est soit l'admin soit la reponse(vérif aussi sur le front)
-            if (user && (user.isAdmin == true || user.id == userOrder)) {
-                console.log('Suppression du answer id :', req.body.answerId);
-                models.Answer
-                    .findOne({
-                        where: { id: req.body.answerId }
-                    })
-                    .then((answerFind) => {
 
-                        if (answerFind.attachement) {
-                            const filename = answerFind.attachement.split('/images/')[1];
-                            console.log("teseeeest", filename);
-                            fs.unlink(`images/${filename}`, () => {
-                                models.Answer
-                                    .destroy({
-                                        where: { id: answerFind.id }
-                                    })
-                                    .then(() => res.end())
-                                    .catch(err => res.status(500).json(err))
-                            })
-                        }
-                        else {
-                            models.Answer
-                                .destroy({
-                                    where: { id: answerFind.id }
-                                })
-                                .then(() => res.end())
-                                .catch(err => res.status(500).json(err))
-                        }
-                    })
-                    .catch(err => res.status(500).json(err))
-            } else { res.status(403).json('Utilisateur non autorisé à supprimer ce post') }
+// Suppression d'un message //
+exports.deleteAnswer = (req, res, next) => {
+    models.Answer.findOne({ where: { id: req.params.answerId } }) // On trouve l'objet dans la base de données //
+        .then((answer) => {
+            models.Answer.destroy({ where: { id: req.params.answerId } }) // Méthode //
+                .then(() => res.status(200).json({ post: 'Answer supprimé' }))
+                .catch(error => res.status(400).json({ error }));
         })
-        .catch(error => res.status(500).json(error));
+        .catch(error => res.status(500).json({ error }));
 };

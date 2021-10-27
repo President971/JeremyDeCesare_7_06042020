@@ -35,7 +35,6 @@ export default new Vuex.Store({
       email: '',
       avatar: '',
     },
-    editOption: ""
   },
   mutations: {
     setStatus: function (state, status) {
