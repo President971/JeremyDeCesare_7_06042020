@@ -1,5 +1,5 @@
-//Import
-let models = require('../models');
+//Import 
+/* let models = require('../models');
 let utils = require('../utils/jwtUtils');
 const fs = require('fs');
 
@@ -66,4 +66,4 @@ exports.deleteAnswer = (req, res, next) => {
                 .catch(error => res.status(400).json({ error }));
         })
         .catch(error => res.status(500).json({ error }));
-};
+}; */

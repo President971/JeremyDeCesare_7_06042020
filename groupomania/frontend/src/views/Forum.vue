@@ -1,22 +1,23 @@
 <template>
-  <b-container id="forum" class="forum">
-    <b-row>
-      <b-col>
+  <v-container id="forum" class="forum">
+    <v-row>
+      <v-col>
         <navbar />
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
         <newmsg />
-      </b-col>
-    </b-row>
-    <b-row align="center" class="my-10">
+      </v-col>
+    </v-row>
+    <v-row align="center" class="my-10">
       <h1>Dernières Publications</h1>
-    </b-row>
-    <b-row v-for="post in allPosts" :key="post.id">
+    </v-row>
+    <v-row v-for="post in allPosts" :key="post.id">
       <post :post="post" />
-    </b-row>
-  </b-container>
+    </v-row>
+    <footer />
+  </v-container>
 </template>
 
 <script>
@@ -25,12 +26,14 @@ import Navbar from "../components/Navbar";
 import Newmsg from "../components/Newmsg";
 import Post from "../components/Post";
 import { mapState } from "vuex";
+import Footer from "../components/Footer";
 
 export default {
   components: {
     Navbar,
     Newmsg,
     Post,
+    Footer,
   },
   name: "Forum",
   data() {
