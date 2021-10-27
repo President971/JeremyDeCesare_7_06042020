@@ -29,6 +29,7 @@ if (!user) {
 export default new Vuex.Store({
   state: {
     status: '',
+    postid: '',
     user: user,
     userInfos: {
       username: '',
@@ -39,6 +40,9 @@ export default new Vuex.Store({
   mutations: {
     setStatus: function (state, status) {
       state.status = status;
+    },
+    Postid: function (state, postid) {
+      state.postid = postid;
     },
     logUser: function (state, user) {
       instance.defaults.headers.common['Authorization'] = user.token;

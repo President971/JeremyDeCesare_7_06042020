@@ -3,8 +3,6 @@
     <v-row>
       <v-col>
         <v-card
-          v-for="post in allPosts"
-          :key="post.id"
           class="mx-auto bg mb-4 pt-4"
           style="max-width: 760px"
         >
@@ -24,7 +22,7 @@
                   mdi-account
                 </v-icon>
                 <span class="text-h6 font-weight-light">
-                  USER
+                  {{ this.user.username}}
                 </span>
               </v-card-title>
             </v-row>
@@ -35,9 +33,6 @@
                 </v-card-text>
               </v-col>
             </v-row>
-            <code>
-              {{ post.id }}
-            </code>
             <v-row v-if="user.isAdmin">
               <v-col align="center" justify="end">
                 <v-btn @click="deletePost(post.id)"> Supprimer </v-btn>
@@ -50,8 +45,6 @@
             style="max-width: 760px"
           >
             <v-card
-              v-for="answer in allAnswers"
-              :key="answer.id"
               class="mx-auto bg mb-4"
               color="#ffd7d7"
               dark
@@ -62,7 +55,6 @@
                   mdi-account
                 </v-icon>
                 <span class="text-h6 font-weight-light black--text">
-                  {{ user.username }}
                 </span>
               </v-card-title>
 
@@ -116,15 +108,6 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:3000/api/post", {
-        headers: {
-          Authorization: "Bearer " + this.$store.state.user.token,
-        },
-      })
-      .then((response) => {
-        this.allPosts = response.data;
-      });
-    axios
       .get("http://localhost:3000/api/answer", {
         headers: {
           Authorization: "Bearer " + this.$store.state.user.token,
@@ -134,6 +117,9 @@ export default {
         this.allAnswers = response.data;
       });
   },
+  props: {
+    post: Object, 
+  },
   computed: {
     ...mapState(["user", "editOption"]),
   },
@@ -141,7 +127,7 @@ export default {
     newAnswer() {
       const fd = new FormData();
       fd.append("content", this.content);
-      fd.append("postId", this.postid);
+      fd.append("postId", this.post.id);
       if (fd.get("content") == "null") {
         let msgReturn = document.getElementById("msgReturnAPI");
         msgReturn.classList.add("text-danger");

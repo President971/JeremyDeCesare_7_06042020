@@ -59,9 +59,9 @@ exports.listMsg = (req, res) => {
 
 // Suppression d'un message //
 exports.deleteAnswer = (req, res, next) => {
-    models.Answer.findOne({ where: { id: req.params.answerId } }) // On trouve l'objet dans la base de données //
+    models.Answer.findOne({ where: { id: req.params.id } }) // On trouve l'objet dans la base de données //
         .then((answer) => {
-            models.Answer.destroy({ where: { id: req.params.answerId } }) // Méthode //
+            models.Answer.destroy({ where: { id: req.params.id } }) // Méthode //
                 .then(() => res.status(200).json({ post: 'Answer supprimé' }))
                 .catch(error => res.status(400).json({ error }));
         })

@@ -16,8 +16,7 @@
                 <span> {{ user.username }} </span>
               </b-col>
             </b-row>
-            <b-row  
-          class="m-auto">
+            <b-row class="m-auto">
               <v-textarea
                 outlined
                 v-model="content"
@@ -85,7 +84,6 @@ export default {
             },
           })
           .then((response) => {
-            //Si retour positif de l'API reload de la page pour affichage du dernier post
             if (response) {
               window.location.reload();
             }
