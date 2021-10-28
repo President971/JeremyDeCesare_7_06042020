@@ -19,5 +19,6 @@ export default {
 .footer {
   background-image: url("~@/assets/icon-left-font-monochrome-white.svg");
   background-position: center;
+  width: 100%;
 }
 </style>
