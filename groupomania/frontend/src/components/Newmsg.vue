@@ -52,7 +52,7 @@
               <!-- Styled -->
               <b-col>
                 <v-file-input
-                  label="File input"
+                  label="Votre image"
                   v-model="postImage"
                   prepend-icon="mdi-camera"
                 ></v-file-input>

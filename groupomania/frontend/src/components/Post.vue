@@ -8,16 +8,13 @@
         img-left
         class="p-3"
         style="max-width: 760px; width: 100%"
-
       />
 
       <v-card-title>
-         {{ post.title }}
+        {{ post.title }}
       </v-card-title>
 
-      <v-card-subtitle>
-         écrit par {{ post.author }}
-      </v-card-subtitle>
+      <v-card-subtitle> écrit par {{ post.author }} </v-card-subtitle>
 
       <v-card-actions>
         <v-row>
@@ -35,16 +32,66 @@
         <div v-show="show">
           <v-divider></v-divider>
 
-          <v-card-text class="text-h5">
+          <v-card-text class="text-h5" bg-color ="red">
             {{ post.content }}
           </v-card-text>
           <v-row v-if="user.isAdmin">
             <v-col align="center" justify="end">
               <v-btn @click="deletePost(post.id)" color="red" class="mb-4">
-                Supprimer
+                Supprimer l'article
               </v-btn>
             </v-col>
           </v-row>
+        </div>
+      </v-expand-transition>
+      <v-expand-transition>
+        <div v-show="show">
+          <v-divider></v-divider>
+           <h4 class="ml-4">Commentaires </h4> 
+          <v-row v-if="user.isAdmin">
+            <v-col align="center" justify="end">
+              <v-btn @click="deleteAnswer(answer.id)" color="red" class="mb-4">
+                Supprimer le Commentaire
+              </v-btn>
+            </v-col>
+          </v-row>
+            <b-row no-gutters>
+              <b-col>
+                <b-card-body>
+                  <b-row align="center">
+                    <b-col>
+                      <h4 class="mt-4">Publier votre Commentaire !</h4>
+                    </b-col>
+                  </b-row>
+                  <b-row class="m-auto mb-4">
+                    <v-text-field
+                      v-model="author"
+                      :counter="30"
+                      :rules="authorRules"
+                      label="Votre Nom"
+                      required
+                    ></v-text-field>
+                  </b-row>
+                  <b-row class="m-auto">
+                    <v-textarea
+                      outlined
+                      :counter="256"
+                      :rules="contentanswerRules"
+                      v-model="contentanswer"
+                      name="input-7-4"
+                      label="Ecrivez votre commentaire"
+                    ></v-textarea>
+                  </b-row>
+                  <b-row>
+                    <b-col align="center" justify="end" class="mt-4">
+                      <v-btn @click="newAnswer()" color="red">
+                        Publier
+                      </v-btn>
+                    </b-col>
+                  </b-row>
+                </b-card-body>
+              </b-col>
+            </b-row>
         </div>
       </v-expand-transition>
     </v-card>
@@ -59,9 +106,21 @@ export default {
   data() {
     return {
       allPosts: [],
+      allAnswers: [],
+      answer: "",
       content: null,
       msgError: "",
       show: false,
+      author: null,
+      authorRules: [
+        (v) => !!v || "Votre nom est requis",
+        (v) => (v && v.length <= 30) || "Max 30 caractères",
+      ],
+      contentanswerRules: [
+        (v) => !!v || "Commentaire requis",
+        (v) => (v && v.length <= 256) || "Max 256 caractères",
+      ],
+      contentanswer: null,
     };
   },
   mounted() {
@@ -82,9 +141,9 @@ export default {
     ...mapState(["user", "editOption"]),
   },
   methods: {
-    /* newAnswer() {
+    newAnswer() {
       const fd = new FormData();
-      fd.append("content", this.content);
+      fd.append("content", this.contentanswer);
       fd.append("postId", this.post.id);
       if (fd.get("content") == "null") {
         let msgReturn = document.getElementById("msgReturnAPI");
@@ -105,7 +164,7 @@ export default {
           })
           .catch((error) => (this.msgError = error));
       }
-    }, */
+    },
     deletePost(postid) {
       axios
         .delete(`http://localhost:3000/api/post/delete/${postid}`, {
@@ -118,7 +177,7 @@ export default {
         })
         .catch((error) => console.log(error));
     },
-    /* deleteAnswer(answerid) {
+    deleteAnswer(answerid) {
       axios
         .delete(`http://localhost:3000/api/post/delete/${answerid}`, {
           headers: {
@@ -129,7 +188,7 @@ export default {
           window.location.reload();
         })
         .catch((error) => console.log(error));
-    },*/
+    },
   },
 };
 </script>
