@@ -23,6 +23,7 @@
         </v-row>
       </b-card>
     </b-row>
+    <footerside />
   </b-container>
 </template>
 
@@ -30,11 +31,13 @@
 import axios from "axios";
 import Navbar from "../components/Navbar.vue";
 import { mapState } from "vuex";
+import Footerside from '../components/Footerside.vue';
 
 export default {
   name: "User",
   components: {
     Navbar,
+    Footerside,
   },
   data() {
     return {
@@ -85,5 +88,6 @@ export default {
 }
 .cardProfil {
   padding-top: 1rem;
+  margin-bottom: 10rem;
 }
 </style>

@@ -8,17 +8,41 @@
       <b-row no-gutters>
         <b-col>
           <b-card-body>
-            <b-row class="mb-4">
+            <b-row align="center">
               <b-col>
-                <v-icon large color="red darken-2">
-                  mdi-account
-                </v-icon>
-                <span> {{ user.username }} </span>
+                <h5>
+                  Bonjour <span style="color:red"> {{ user.username }} </span> !
+                </h5>
+                <h5>
+                  Bienvenue sur votre réseau social
+                  <span style="color:red"> Groupomania </span>
+                </h5>
+                <h4 class="mt-4">Publier votre Article !</h4>
               </b-col>
+            </b-row>
+            <b-row class="m-auto">
+              <v-text-field
+                v-model="author"
+                :counter="30"
+                :rules="authorRules"
+                label="Votre Nom"
+                required
+              ></v-text-field>
+            </b-row>
+            <b-row class="m-auto mb-8">
+              <v-text-field
+                v-model="title"
+                :counter="100"
+                :rules="titleRules"
+                label="Votre Titre"
+                required
+              ></v-text-field>
             </b-row>
             <b-row class="m-auto">
               <v-textarea
                 outlined
+                :counter="1000"
+                :rules="contentRules"
                 v-model="content"
                 name="input-7-4"
                 label="Ecrivez votre message"
@@ -33,9 +57,9 @@
                   prepend-icon="mdi-camera"
                 ></v-file-input>
               </b-col>
-              <b-col align="center" justify="end">
+              <b-col align="center" justify="end" class="mt-4">
                 <v-btn @click="newMessage()" color="red">
-                  Poster
+                  Publier
                 </v-btn>
               </b-col>
             </b-row>
@@ -53,7 +77,22 @@ export default {
   name: "CreatePost",
   data() {
     return {
+      valid: true,
+      title: null,
+      titleRules: [
+        (v) => !!v || "Votre Titre est requis",
+        (v) => (v && v.length <= 100) || "Max 100 caractères",
+      ],
+      author: null,
+      authorRules: [
+        (v) => !!v || "Votre nom est requis",
+        (v) => (v && v.length <= 30) || "Max 30 caractères",
+      ],
       content: null,
+      contentRules: [
+        (v) => !!v || "Votre nom est requis",
+        (v) => (v && v.length <= 1000) || "Max 1000 caractères",
+      ],
       postImage: null,
       msgError: "",
     };
@@ -72,7 +111,14 @@ export default {
       const fd = new FormData();
       fd.append("inputFile", this.postImage);
       fd.append("content", this.content);
-      if (fd.get("inputFile") == "null" && fd.get("content") == "null") {
+      fd.append("author", this.author);
+      fd.append("title", this.title);
+      if (
+        fd.get("inputFile") == "null" &&
+        fd.get("content") == "null" &&
+        fd.get("author") == "null" &&
+        fd.get("title") == "null"
+      ) {
         let msgReturn = document.getElementById("msgReturnAPI");
         msgReturn.classList.add("text-danger");
         this.msgError = "Rien à publier";
@@ -85,7 +131,7 @@ export default {
           })
           .then((response) => {
             if (response) {
-              window.location.reload();
+              this.$router.push("/forum");
             }
           })
           .catch((error) => (this.msgError = error));

@@ -10,13 +10,13 @@
         <newmsg />
       </v-col>
     </v-row>
-    <v-row align="center" class="my-10">
+    <b-row align="center" class="my-10">
       <h1>Dernières Publications</h1>
-    </v-row>
+    </b-row>
     <v-row v-for="post in allPosts" :key="post.id">
       <post :post="post" />
     </v-row>
-    <footer />
+    <footerside />
   </v-container>
 </template>
 
@@ -26,14 +26,14 @@ import Navbar from "../components/Navbar";
 import Newmsg from "../components/Newmsg";
 import Post from "../components/Post";
 import { mapState } from "vuex";
-import Footer from "../components/Footer";
+import Footerside from "../components/Footerside";
 
 export default {
   components: {
     Navbar,
     Newmsg,
     Post,
-    Footer,
+    Footerside,
   },
   name: "Forum",
   data() {

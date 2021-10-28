@@ -17,6 +17,8 @@ exports.create = (req, res) => {
         .then(user => {
             if (user !== null) {
                 //Récupération du corps du post
+                let title = req.body.title;
+                let author = req.body.author;
                 let content = req.body.content;
                 if (req.file != undefined) {
                     attachmentURL = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
@@ -24,10 +26,12 @@ exports.create = (req, res) => {
                 else {
                     attachmentURL == null
                 };
-                if ((content == 'null' && attachmentURL == null)) {
+                if ((title == 'null' && author == 'null' && content == 'null' && attachmentURL == null)) {
                     res.status(400).json({ error: 'Rien à publier' })
                 } else {
                     models.Post.create({
+                        title: title,
+                        author: author,
                         content: content,
                         attachement: attachmentURL,
                         UserId: user.id

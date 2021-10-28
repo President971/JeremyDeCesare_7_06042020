@@ -12,11 +12,11 @@
       />
 
       <v-card-title>
-        Titre de l'article
+         {{ post.title }}
       </v-card-title>
 
       <v-card-subtitle>
-        Auteur de l'article
+         écrit par {{ post.author }}
       </v-card-subtitle>
 
       <v-card-actions>

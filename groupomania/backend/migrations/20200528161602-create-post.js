@@ -16,6 +16,12 @@ module.exports = {
           key: 'id'
         }
       },
+      title: {
+        type: Sequelize.STRING
+      },
+      author: {
+        type: Sequelize.STRING
+      },
       content: {
         type: Sequelize.STRING
       },
