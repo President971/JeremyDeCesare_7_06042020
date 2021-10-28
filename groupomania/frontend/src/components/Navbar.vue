@@ -49,8 +49,4 @@ export default {
 };
 </script>
 <style>
-.responsive {
-  width: 100%;
-  height: 480px;
-}
 </style>

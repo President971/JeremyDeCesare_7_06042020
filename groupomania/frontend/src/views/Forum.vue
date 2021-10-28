@@ -44,7 +44,7 @@ export default {
   computed: {
     ...mapState(["user", "editOption"]),
   },
-  mounted() {
+  created() {
     if (this.$store.state.user.userId == -1) {
       this.$router.push("/");
       return;

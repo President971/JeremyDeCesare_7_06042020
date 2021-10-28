@@ -18,7 +18,9 @@
         </b-card-text>
         <v-row>
           <v-col align="center" justify="end">
-            <v-btn @click="deleteAccount()" color="red"> Suppression du Compte </v-btn>
+            <v-btn @click="deleteAccount()" color="red">
+              Suppression du Compte
+            </v-btn>
           </v-col>
         </v-row>
       </b-card>
@@ -31,7 +33,7 @@
 import axios from "axios";
 import Navbar from "../components/Navbar.vue";
 import { mapState } from "vuex";
-import Footerside from '../components/Footerside.vue';
+import Footerside from "../components/Footerside.vue";
 
 export default {
   name: "User",
@@ -44,7 +46,7 @@ export default {
       retourAPI: "",
     };
   },
-  mounted: function() {
+  created: function() {
     console.log(this.$store.state.user);
     if (this.$store.state.user.userId == -1) {
       this.$router.push("/");
@@ -53,9 +55,7 @@ export default {
     this.$store.dispatch("getUserInfos");
   },
   computed: {
-    ...mapState({
-      user: "userInfos",
-    }),
+    ...mapState(["user", "userInfos"]),
   },
   methods: {
     logout() {
