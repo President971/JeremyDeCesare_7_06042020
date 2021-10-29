@@ -5,12 +5,14 @@ Fonctionnalités : Le client souhaite que ses employés écrivent et/ou partagen
 
 Installation du projet.
 
-Front-End cd groupomania\frontend npm install npm run serve
+Front-End cd groupomania\frontend //> npm install //> npm run serve
 
 Database Sequelize-CLI DB Migrate DB Create
 
-Back-End cd groupomania\backend npm install nodemon server
+Back-End cd groupomania\backend npm  //> install express //> nodemon server
 
 Droits Administrateur Via PHPMYADMIN "users" setAdmin 1 ou directement via MySQL
 
-Fichier groupomanie.sql disponible pour import de la BDD sur votre systeme
+Fichier groupomania.sql disponible pour import de la BDD sur votre systeme
+
+Backend\config\ config.json , pour configurer vos acces à la BDD.
