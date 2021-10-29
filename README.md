@@ -5,11 +5,11 @@ Fonctionnalités : Le client souhaite que ses employés écrivent et/ou partagen
 
 Installation du projet.
 
-Front-End cd frontend npm install npm run serve
+Front-End cd groupomania\frontend npm install npm run serve
 
 Database Sequelize-CLI DB Migrate DB Create
 
-Back-End cd backend npm install nodemon server
+Back-End cd groupomania\backend npm install nodemon server
 
 Droits Administrateur Via PHPMYADMIN
 

@@ -58,7 +58,7 @@
                 ></v-file-input>
               </b-col>
               <b-col align="center" justify="end" class="mt-4">
-                <v-btn @click="newMessage()" color="red">
+                <v-btn @click="newMessage()" color="#ffd7d7">
                   Publier
                 </v-btn>
               </b-col>

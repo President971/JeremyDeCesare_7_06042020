@@ -15,83 +15,73 @@
       </v-card-title>
 
       <v-card-subtitle> écrit par {{ post.author }} </v-card-subtitle>
+      <v-divider></v-divider>
 
-      <v-card-actions>
-        <v-row>
-          <v-col>
-            <v-btn @click="show = !show" color="red" class="mb-4">
-              Lire l'Article
-            </v-btn>
-          </v-col>
-        </v-row>
-
-        <v-spacer></v-spacer>
-      </v-card-actions>
-
+      <v-card-text class="text-h5" bg-color="red">
+        {{ post.content }}
+      </v-card-text>
+      <v-row >
+        <v-col align="center" justify="end">
+          <v-btn @click="show = !show" color="#ffd7d7" class="mb-4" >
+            Poster un commentaire
+          </v-btn>
+        </v-col>
+      </v-row>
+      <v-row v-if="user.isAdmin">
+        <v-col align="center" justify="end">
+          <v-btn @click="deletePost(post.id)" color="red" class="mb-4">
+            Supprimer l'article
+          </v-btn>
+        </v-col>
+      </v-row>
+      <v-divider></v-divider>
+      <h4 class="ml-4">Commentaires</h4>
+      <v-row v-if="user.isAdmin">
+        <v-col align="center" justify="end">
+          <v-btn @click="deleteAnswer(answer.id)" color="red" class="mb-4">
+            Supprimer le Commentaire
+          </v-btn>
+        </v-col>
+      </v-row>
       <v-expand-transition>
         <div v-show="show">
-          <v-divider></v-divider>
-
-          <v-card-text class="text-h5" bg-color ="red">
-            {{ post.content }}
-          </v-card-text>
-          <v-row v-if="user.isAdmin">
-            <v-col align="center" justify="end">
-              <v-btn @click="deletePost(post.id)" color="red" class="mb-4">
-                Supprimer l'article
-              </v-btn>
-            </v-col>
-          </v-row>
-        </div>
-      </v-expand-transition>
-      <v-expand-transition>
-        <div v-show="show">
-          <v-divider></v-divider>
-           <h4 class="ml-4">Commentaires </h4> 
-          <v-row v-if="user.isAdmin">
-            <v-col align="center" justify="end">
-              <v-btn @click="deleteAnswer(answer.id)" color="red" class="mb-4">
-                Supprimer le Commentaire
-              </v-btn>
-            </v-col>
-          </v-row>
-            <b-row no-gutters>
-              <b-col>
-                <b-card-body>
-                  <b-row align="center">
-                    <b-col>
-                      <h4 class="mt-4">Publier votre Commentaire !</h4>
-                    </b-col>
-                  </b-row>
-                  <b-row class="m-auto mb-4">
-                    <v-text-field
-                      v-model="author"
-                      :counter="30"
-                      :rules="authorRules"
-                      label="Votre Nom"
-                      required
-                    ></v-text-field>
-                  </b-row>
-                  <b-row class="m-auto">
-                    <v-textarea
-                      outlined
-                      :counter="256"
-                      :rules="contentanswerRules"
-                      v-model="contentanswer"
-                      name="input-7-4"
-                      label="Ecrivez votre commentaire"
-                    ></v-textarea>
-                  </b-row>
-                  <b-row>
-                    <b-col align="center" justify="end" class="mt-4">
-                      <v-btn @click="newAnswer()" color="red">
-                        Publier
-                      </v-btn>
-                    </b-col>
-                  </b-row>
-                </b-card-body>
-              </b-col>
-            </b-row>
+          <b-row no-gutters>
+            <b-col>
+              <b-card-body>
+                <b-row align="center">
+                  <b-col>
+                    <h4 class="mt-4">Publier votre Commentaire !</h4>
+                  </b-col>
+                </b-row>
+                <b-row class="m-auto mb-4">
+                  <v-text-field
+                    v-model="author"
+                    :counter="30"
+                    :rules="authorRules"
+                    label="Votre Nom"
+                    required
+                  ></v-text-field>
+                </b-row>
+                <b-row class="m-auto">
+                  <v-textarea
+                    outlined
+                    :counter="256"
+                    :rules="contentanswerRules"
+                    v-model="contentanswer"
+                    name="input-7-4"
+                    label="Ecrivez votre commentaire"
+                  ></v-textarea>
+                </b-row>
+                <b-row>
+                  <b-col align="center" justify="end" class="mt-4">
+                    <v-btn @click="newAnswer()" color="#ffd7d7">
+                      Publier
+                    </v-btn>
+                  </b-col>
+                </b-row>
+              </b-card-body>
+            </b-col>
+          </b-row>
         </div>
       </v-expand-transition>
     </v-card>
