@@ -11,6 +11,6 @@ Database Sequelize-CLI DB Migrate DB Create
 
 Back-End cd groupomania\backend npm install nodemon server
 
-Droits Administrateur Via PHPMYADMIN setAdmin 1 ou directement via MySQL
+Droits Administrateur Via PHPMYADMIN "users" setAdmin 1 ou directement via MySQL
 
 Fichier groupomanie.sql disponible pour import de la BDD sur votre systeme
