@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : jeu. 28 oct. 2021 à 12:48
+-- Généré le : ven. 29 oct. 2021 à 13:43
 -- Version du serveur : 5.7.33
 -- Version de PHP : 7.4.19
 
@@ -29,12 +29,24 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `answers` (
   `id` int(11) NOT NULL,
+  `author` text NOT NULL,
   `content` text NOT NULL,
   `postId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `answers`
+--
+
+INSERT INTO `answers` (`id`, `author`, `content`, `postId`, `userId`, `createdAt`, `updatedAt`) VALUES
+(7, 'Patrick', 'Ah génial , moi aussi je regardais souvent !!!', 6, 2, '2021-10-29 15:34:30', '2021-10-29 15:34:30'),
+(8, 'Emmanuel', 'Pff , je préférè la martinique', 7, 3, '2021-10-29 15:37:55', '2021-10-29 15:37:55'),
+(10, 'Illidan', 'La meilleur trilogie de tout les temps , je suis bien d\'accord', 8, 4, '2021-10-29 15:39:57', '2021-10-29 15:39:57'),
+(11, 'Illidan', 'Emmanuel t\'es toujours entrain de raler', 7, 4, '2021-10-29 15:40:08', '2021-10-29 15:40:08'),
+(12, 'Illidan', 'C\'est cool et DBZ aussi !!', 6, 4, '2021-10-29 15:40:26', '2021-10-29 15:40:26');
 
 -- --------------------------------------------------------
 
@@ -58,11 +70,11 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `userId`, `title`, `author`, `content`, `attachement`, `createdAt`, `updatedAt`) VALUES
-(2, 1, 'La Guadeloupe', 'Admin', 'la Guadeloupe est un groupe d\'îles situé dans le sud de la mer des Caraïbes. Ressemblant à un papillon, ses deux plus grandes îles sont séparées par la Rivière Salée.', 'http://localhost:3000/images/Guadeloupe.jpg1635423662976.jpg', '2021-10-28 14:21:02', '2021-10-28 14:21:02'),
-(3, 1, 'The Burning Crusade', 'Illiand', 'Vous n’êtes pas prêt', 'http://localhost:3000/images/1185009-illidan-legion-amp_main_media_schema-2.jpg1635424037152.jpg', '2021-10-28 14:27:17', '2021-10-28 14:27:17'),
-(4, 1, 'Olive et Tom le mange de mon enfance', 'Jean-Michel', 'Olivier Atton rêve de devenir le meilleur footballeur au monde. Il rencontre et affronte tous les meilleurs joueurs du pays, avec lesquels il se lie d\'amitié, tels que Thomas Price, Ben Becker ou encore Bruce Harper.', 'http://localhost:3000/images/71683471579608775.jpg1635424231434.jpg', '2021-10-28 14:30:31', '2021-10-28 14:30:31'),
-(5, 1, 'Une Trilogie à ne pas raté', 'Sam Gamegie', 'Le Seigneur des anneaux est une trilogie cinématographique de fantasy américano-néo-zélandaise réalisée par Peter Jackson et fondée sur le roman du même nom en trois volumes de J. R. R. Tolkien. ', 'http://localhost:3000/images/index.jpg1635424434765.jpg', '2021-10-28 14:33:54', '2021-10-28 14:33:54'),
-(6, 1, 'A350 , nouvelle oiseau du ciel', 'Mac Fly (sans Carlito)', 'L\'Airbus A350 XWB est un avion de ligne long-courrier et gros porteur du constructeur européen Airbus. Initialement baptisé A350, ce modèle était dérivé de l\'A330 ; toutefois, à la suite des remarques des compagnies aériennes, il a été décidé à la mi-juillet 2006 d\'en revoir le concept et de le munir d\'un fuselage plus large, à la fois par rapport aux A330 et A340, et surtout par rapport à son principal concurrent, à cette époque, le Boeing 7873. Cette évolution permet aujourd\'hui à l\'A350 de concurrencer aussi le nouveau Boeing 777X (dont le premier vol, initialement prévu le 13 mars 2019, a finalement eu lieu le 25 janvier 2020).\r\n\r\nLe projet a été ainsi rebaptisé « A350 XWB », pour eXtra Wide Body – « fuselage extra-large », en anglais. Cette modification tardive, ainsi qu\'une conception faisant davantage appel aux matériaux composites, ont fortement augmenté les coûts de conception de l\'avion4 et ont reporté de 2011 à 2014 son entrée en service. ', 'http://localhost:3000/images/19419012lpw-19419105-article-jpg_6535007_1250x625.jpg1635424719380.jpg', '2021-10-28 14:38:39', '2021-10-28 14:38:39');
+(6, 1, 'Olive et Tom', 'Admin', 'Olivier Atton rêve de devenir le meilleur footballeur au monde. Il rencontre et affronte tous les meilleurs joueurs du pays, avec lesquels il se lie d\'amitié, tels que Thomas Price, Ben Becker ou encore Bruce Harper.', 'http://localhost:3000/images/71683471579608775.jpg1635424231434.jpg1635513948410.jpg', '2021-10-29 15:25:48', '2021-10-29 15:25:48'),
+(7, 2, 'La Guadeloupe', 'Patrick', 'Territoire français d\'outre-mer, la Guadeloupe est un groupe d\'îles situé dans le sud de la mer des Caraïbes. Ressemblant à un papillon, ses deux plus grandes îles sont séparées par la Rivière Salée. L\'île vallonnée de Grande-Terre possède de longues plages et des champs de canne à sucre. Sur l\'île de Basse-Terre, le parc national de la Guadeloupe abrite les chutes du Carbet et le volcan de la Grande Soufrière. Parmi les îles de plus petite taille figurent Marie-Galante et la Désirade.', 'http://localhost:3000/images/Guadeloupe.jpg1635423114877.jpg1635511936403.jpg1635514445300.jpg', '2021-10-29 15:34:05', '2021-10-29 15:34:05'),
+(8, 3, 'Le Seigneur des Anneaux', 'Emmanuel', '\r\nLe Seigneur des anneaux est une trilogie cinématographique de fantasy américano-néo-zélandaise réalisée par Peter Jackson et fondée sur le roman du même nom en trois volumes de J. R. R. Tolkien. Les films composant cette trilogie sont La Communauté de l\'anneau, Les Deux Tours et Le Retour du roi.', 'http://localhost:3000/images/1608701.jpg1635514656281.jpg', '2021-10-29 15:37:36', '2021-10-29 15:37:36'),
+(9, 4, 'The Burning Crusade', 'Illidan', 'Vous n’êtes pas prêt !', 'http://localhost:3000/images/1185009-illidan-legion-amp_main_media_schema-2.jpg1635424037152.jpg1635514776737.jpg', '2021-10-29 15:39:36', '2021-10-29 15:39:36'),
+(10, 1, 'L\'A350', 'Admin', 'L\'Airbus A350 XWB est un avion de ligne long-courrier et gros porteur du constructeur européen Airbus. Initialement baptisé A350, ce modèle était dérivé de l\'A330 ; toutefois, à la suite des remarques des compagnies aériennes, il a été décidé à la mi-juillet 2006 d\'en revoir le concept et de le munir d\'un fuselage plus large, à la fois par rapport aux A330 et A340, et surtout par rapport à son principal concurrent, à cette époque, le Boeing 7873. Cette évolution permet aujourd\'hui à l\'A350 de concurrencer aussi le nouveau Boeing 777X (dont le premier vol, initialement prévu le 13 mars 2019, a finalement eu lieu le 25 janvier 2020).\r\n\r\nLe projet a été ainsi rebaptisé « A350 XWB », pour eXtra Wide Body – « fuselage extra-large », en anglais. Cette modification tardive, ainsi qu\'une conception faisant davantage appel aux matériaux composites, ont fortement augmenté les coûts de conception de l\'avion et ont reporté de 2011 à 2014 son entrée en service', 'http://localhost:3000/images/19419012lpw-19419105-article-jpg_6535007_1250x625.jpg1635424719380.jpg1635514923686.jpg', '2021-10-29 15:42:03', '2021-10-29 15:42:03');
 
 -- --------------------------------------------------------
 
@@ -104,7 +116,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `isAdmin`, `createdAt`, `updatedAt`) VALUES
-(1, 'admin@admin.fr', 'Admin', '$2b$10$WG.thkzn8vOmhwDPGz.5hO0MxwIAI6eA8I3VnX2DoXfx9XPcxiFie', 1, '2021-10-28 13:50:44', '2021-10-28 13:50:44');
+(1, 'admin@admin.fr', 'Admin', '$2b$10$3FHcgnERmPqz7RQEW9qxU.VtjXWcoZv2QJI.NGOYuExeaQC83/6cy', 1, '2021-10-29 14:50:39', '2021-10-29 14:50:39'),
+(2, 'patrick.juvet@test.fr', 'Patrick', '$2b$10$sXo79ltJ2tVBF9rJE3tszeAPRPnpuKW2JTEyCJZDby9Zerwk/B69O', 0, '2021-10-29 15:33:43', '2021-10-29 15:33:43'),
+(3, 'micron@test.fr', 'Emmanuel', '$2b$10$T6Qc1in71.JSwG9ChCaoH.QaDE/uZ2xZfm/6X1tXiSFQrFtq4V3QC', 0, '2021-10-29 15:36:43', '2021-10-29 15:36:43'),
+(4, 'illidan@test.fr', 'Illidan', '$2b$10$UpdoOUNQg489JQn6D7YMreDOdwCXc6n6OCsncEb1sIoQYKDwRYJ2u', 0, '2021-10-29 15:39:09', '2021-10-29 15:39:09');
 
 --
 -- Index pour les tables déchargées
@@ -146,19 +161,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Contraintes pour les tables déchargées
