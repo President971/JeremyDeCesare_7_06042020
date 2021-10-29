@@ -20,15 +20,6 @@
                 <h4 class="mt-4">Publier votre Article !</h4>
               </b-col>
             </b-row>
-            <b-row class="m-auto">
-              <v-text-field
-                v-model="author"
-                :counter="30"
-                :rules="authorRules"
-                label="Votre Nom"
-                required
-              ></v-text-field>
-            </b-row>
             <b-row class="m-auto mb-8">
               <v-text-field
                 v-model="title"
@@ -83,11 +74,6 @@ export default {
         (v) => !!v || "Votre Titre est requis",
         (v) => (v && v.length <= 100) || "Max 100 caractères",
       ],
-      author: null,
-      authorRules: [
-        (v) => !!v || "Votre nom est requis",
-        (v) => (v && v.length <= 30) || "Max 30 caractères",
-      ],
       content: null,
       contentRules: [
         (v) => !!v || "Votre nom est requis",
@@ -131,7 +117,7 @@ export default {
           })
           .then((response) => {
             if (response) {
-              this.$router.push("/forum");
+              window.location.reload();
             }
           })
           .catch((error) => (this.msgError = error));

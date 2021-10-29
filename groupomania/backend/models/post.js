@@ -9,11 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     {});
   Post.associate = function (models) {
     // associations can be defined here
-    models.Post.hasMany(models.Answer, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
+    models.Post.hasMany(models.Answer, { as: "answers" });
     models.Post.belongsTo(models.User, {
       foreignKey: {
         allowNull: false

@@ -8,6 +8,6 @@ const multer = require('../middleware/multer-config');
 //Routage
 router.post("/create", auth, multer, answerCtrl.create);
 router.delete("/delete/:answerId", answerCtrl.deleteAnswer);
-router.get("/", auth, answerCtrl.listMsg);
+
 
 module.exports = router; 

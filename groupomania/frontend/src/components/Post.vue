@@ -20,9 +20,9 @@
       <v-card-text class="text-h5" bg-color="red">
         {{ post.content }}
       </v-card-text>
-      <v-row >
+      <v-row>
         <v-col align="center" justify="end">
-          <v-btn @click="show = !show" color="#ffd7d7" class="mb-4" >
+          <v-btn @click="show = !show" color="#ffd7d7" class="mb-4">
             Poster un commentaire
           </v-btn>
         </v-col>
@@ -35,13 +35,23 @@
         </v-col>
       </v-row>
       <v-divider></v-divider>
-      <h4 class="ml-4">Commentaires</h4>
-      <v-row v-if="user.isAdmin">
-        <v-col align="center" justify="end">
-          <v-btn @click="deleteAnswer(answer.id)" color="red" class="mb-4">
-            Supprimer le Commentaire
-          </v-btn>
-        </v-col>
+      <v-row v-if="post.answers.length > 0">
+        <h4 class="ml-4">Commentaires</h4>
+        <v-card class="mx-auto" color="#26c6da" dark max-width="400" v-for="answer in post.answers" :key="answer.id">
+          <v-card-title>
+            <span class="text-h6 font-weight-light">{{ answer.author}} </span>
+          </v-card-title>
+          <v-card-text class="text-h5 font-weight-bold">
+            {{ answer.content }}
+          </v-card-text>
+          <v-row v-if="user.isAdmin">
+            <v-col align="center" justify="end">
+              <v-btn @click="deleteAnswer(answer.id)" color="red" class="mb-4">
+                Supprimer le Commentaire
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-card>
       </v-row>
       <v-expand-transition>
         <div v-show="show">
@@ -52,15 +62,6 @@
                   <b-col>
                     <h4 class="mt-4">Publier votre Commentaire !</h4>
                   </b-col>
-                </b-row>
-                <b-row class="m-auto mb-4">
-                  <v-text-field
-                    v-model="author"
-                    :counter="30"
-                    :rules="authorRules"
-                    label="Votre Nom"
-                    required
-                  ></v-text-field>
                 </b-row>
                 <b-row class="m-auto">
                   <v-textarea
@@ -101,28 +102,12 @@ export default {
       content: null,
       msgError: "",
       show: false,
-      author: null,
-      authorRules: [
-        (v) => !!v || "Votre nom est requis",
-        (v) => (v && v.length <= 30) || "Max 30 caractères",
-      ],
       contentanswerRules: [
         (v) => !!v || "Commentaire requis",
         (v) => (v && v.length <= 256) || "Max 256 caractères",
       ],
       contentanswer: null,
     };
-  },
-  mounted() {
-    axios
-      .get("http://localhost:3000/api/answer", {
-        headers: {
-          Authorization: "Bearer " + this.$store.state.user.token,
-        },
-      })
-      .then((response) => {
-        this.allAnswers = response.data;
-      });
   },
   props: {
     post: Object,
@@ -168,8 +153,9 @@ export default {
         .catch((error) => console.log(error));
     },
     deleteAnswer(answerid) {
+       console.log(answerid + 1);
       axios
-        .delete(`http://localhost:3000/api/post/delete/${answerid}`, {
+        .delete(`http://localhost:3000/api/answer/delete/${answerid}`, {
           headers: {
             Authorization: "Bearer " + this.$store.state.user.token,
           },

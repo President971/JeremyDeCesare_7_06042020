@@ -2,6 +2,7 @@
 let models = require('../models');
 let utils = require('../utils/jwtUtils');
 const fs = require('fs');
+const answer = require('../models/answer');
 
 
 //Création d'un message
@@ -18,7 +19,7 @@ exports.create = (req, res) => {
             if (user !== null) {
                 //Récupération du corps du post
                 let title = req.body.title;
-                let author = req.body.author;
+                let author = user.username;
                 let content = req.body.content;
                 if (req.file != undefined) {
                     attachmentURL = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
@@ -53,6 +54,7 @@ exports.create = (req, res) => {
 //Afficher les posts sur le mur
 exports.listMsg = (req, res) => {
     models.Post.findAll({
+        include: ["answers"],
         order: [['createdAt', 'DESC']]
     })
         .then(posts => {
@@ -67,7 +69,7 @@ exports.listMsg = (req, res) => {
 
 // Suppression d'un message //
 exports.deletePost = (req, res, next) => {
-    models.Post.findOne({ where: { id: req.params.postId }}) // On trouve l'objet dans la base de données //
+    models.Post.findOne({ where: { id: req.params.postId } }) // On trouve l'objet dans la base de données //
         .then((post) => {
             models.Post.destroy({ where: { id: req.params.postId } }) // Méthode //
                 .then(() => res.status(200).json({ post: 'Post supprimé' }))
