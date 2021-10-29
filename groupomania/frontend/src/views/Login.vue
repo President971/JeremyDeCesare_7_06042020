@@ -16,36 +16,41 @@
           <a class="card__action" @click="switchToLogin()">Se connecter</a>
         </p>
         <v-col v-if="mode == 'login'">
-          <v-form ref="form" lazy-validation>
+          <v-form ref="form" v-model="valid">
             <v-text-field
               v-model="email"
+              :rules="emailRules"
               label="E-mail"
               required
             ></v-text-field>
             <v-text-field
               type="password"
               v-model="password"
+              :rules="passwordRules"
               label="Mot de Passe"
               required
             ></v-text-field>
           </v-form>
         </v-col>
         <v-col v-else>
-          <v-form ref="form" lazy-validation>
+          <v-form ref="form" v-model="valid">
             <v-text-field
               v-model="email"
+              :rules="emailRules"
               label="E-mail"
-              required
-            ></v-text-field>
-            <v-text-field
-              v-model="username"
-              label="Nom d'utilisateur"
               required
             ></v-text-field>
             <v-text-field
               type="password"
               v-model="password"
+              :rules="passwordRules"
               label="Mot de Passe"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="username"
+              :rules="usernameRules"
+              label="Nom d'utilisateur"
               required
             ></v-text-field>
           </v-form>
@@ -62,7 +67,7 @@
             class="form-row"
             v-if="mode == 'create' && status == 'error_create'"
           >
-            Adresse mail ou Nom d'utilisateur incorrecte
+            Adresse mail ou Nom d'utilisateur incorrect
           </div>
 
           <v-spacer></v-spacer>
@@ -96,9 +101,29 @@ export default {
   data: function() {
     return {
       mode: "login",
+      valid: true,
+      emailRules: [
+        (v) => !!v || "E-mail requis ",
+        (v) =>
+          /^[a-z0-9!#$ %& '*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&' * +/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/g.test(
+            v
+          ) || "E-mail doit être valide",
+      ],
       email: "",
       username: "",
+      usernameRules: [
+        (v) => !!v || "Votre nom d'utilisateur est requis ",
+        (v) =>
+          /^(?!.*\.\.)(?!.*\.$)[^\W ][\w. ]{0,29}$/.test(v) ||
+          "Nom d'utilisateur correct requis",
+      ],
       password: "",
+      passwordRules: [
+        (v) => !!v || "Mot de passe requis ",
+        (v) =>
+          /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/.test(v) ||
+          "le Mot de passe doit contenir 8 caractères dont au minimum une majuscule, une minuscule, un caractère numérique et un caractère spécial",
+      ],
     };
   },
   computed: {
@@ -162,5 +187,4 @@ export default {
   },
 };
 </script>
-<style>
-</style>
+<style></style>
