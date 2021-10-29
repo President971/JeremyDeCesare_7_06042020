@@ -37,7 +37,7 @@
       <v-divider></v-divider>
       <v-row v-if="post.answers.length > 0">
         <h4 class="ml-4">Commentaires</h4>
-        <v-card class="mx-auto" color="#26c6da" dark max-width="400" v-for="answer in post.answers" :key="answer.id">
+        <v-card class="mx-auto mb-4" color="#ffd7d7"  max-width="400" v-for="answer in post.answers" :key="answer.id">
           <v-card-title>
             <span class="text-h6 font-weight-light">{{ answer.author}} </span>
           </v-card-title>
